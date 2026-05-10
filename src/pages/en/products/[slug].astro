@@ -25,9 +25,10 @@ const titleSuffixEN: Record<string, string> = {
 const candidateTitleEN = `${product.nameEN} — ${titleSuffixEN[product.category]} | Saytad`;
 const title = candidateTitleEN.length <= 60 ? candidateTitleEN : `${product.nameEN} | Saytad Baklava`;
 const baseDesc = product.descEN;
-const description = baseDesc.length >= 80
+const padded = baseDesc.length >= 80
   ? baseDesc
-  : `${baseDesc}. ${product.priceEN} — handcrafted in Istanbul, same-day delivery. Saytad Bahçeşehir & Yeşilköy.`;
+  : `${baseDesc}. ${product.priceEN} — handcrafted in Istanbul, same-day delivery.`;
+const description = padded.length > 158 ? padded.slice(0, 155).replace(/\s+\S*$/, '') + '…' : padded;
 
 const schema = [
   orgSchema,

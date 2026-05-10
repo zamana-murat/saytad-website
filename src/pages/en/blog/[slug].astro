@@ -17,7 +17,11 @@ const url = `${SITE.url}/en/blog/${post.slugEN}`;
 const altUrl = `/blog/${post.slugTR}`;
 const fullTitle = `${post.title.en} ${post.titleEm.en}`.trim();
 const seoTitle = post.title.en.replace(/[:：]\s*$/, '').trim();
-const title = `${seoTitle} | Saytad Magazine`;
+const baseTitle = seoTitle.length < 30 && post.titleEm.en
+  ? `${seoTitle}: ${post.titleEm.en.split(/[—,]/)[0].trim()}`
+  : seoTitle;
+const trimmedBase = baseTitle.length > 48 ? baseTitle.slice(0, 45).replace(/\s+\S*$/, '') + '…' : baseTitle;
+const title = `${trimmedBase} | Saytad Magazine`;
 const rawDesc = post.excerpt.en || post.lead.en;
 const description = rawDesc.length <= 160
   ? rawDesc

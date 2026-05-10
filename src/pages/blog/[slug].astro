@@ -18,7 +18,12 @@ const altUrl = `/en/blog/${post.slugEN}`;
 const fullTitle = `${post.title.tr} ${post.titleEm.tr}`.trim();
 // SEO title — short form (just the lead clause + brand) to stay under ~60 chars
 const seoTitle = post.title.tr.replace(/[:：]\s*$/, '').trim();
-const title = `${seoTitle} | Saytad Dergisi`;
+// If just-title is short, add the italic subtitle for context
+const baseTitle = seoTitle.length < 30 && post.titleEm.tr
+  ? `${seoTitle}: ${post.titleEm.tr.split(/[—,]/)[0].trim()}`
+  : seoTitle;
+const trimmedBase = baseTitle.length > 48 ? baseTitle.slice(0, 45).replace(/\s+\S*$/, '') + '…' : baseTitle;
+const title = `${trimmedBase} | Saytad Dergisi`;
 // Trim description to ~155 chars on word boundary
 const rawDesc = post.excerpt.tr || post.lead.tr;
 const description = rawDesc.length <= 160

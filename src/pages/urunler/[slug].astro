@@ -25,11 +25,12 @@ const titleSuffixTR: Record<string, string> = {
 // Only add suffix if total stays under 60 chars; otherwise keep title clean
 const candidateTitle = `${product.nameTR} — ${titleSuffixTR[product.category]} | Saytad`;
 const title = candidateTitle.length <= 60 ? candidateTitle : `${product.nameTR} | Saytad Baklava`;
-// Pad description to ~155 chars when needed
+// Pad description to ~155 chars when needed (cap at 158)
 const baseDesc = product.descTR;
-const description = baseDesc.length >= 80
+const padded = baseDesc.length >= 80
   ? baseDesc
-  : `${baseDesc}. ${product.priceTR} — İstanbul'da el yapımı, aynı gün teslimat. Saytad Bahçeşehir & Yeşilköy.`;
+  : `${baseDesc}. ${product.priceTR} — İstanbul'da el yapımı, aynı gün teslimat.`;
+const description = padded.length > 158 ? padded.slice(0, 155).replace(/\s+\S*$/, '') + '…' : padded;
 
 const schema = [
   orgSchema,
