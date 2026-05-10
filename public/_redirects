@@ -83,5 +83,5 @@
 # Legacy bbimgs/ image references → /images/
 /bbimgs/* /images/:splat 301
 
-# Old cgi-bin (defensive)
-/cgi-bin/* / 410
+# Old cgi-bin (defensive — redirect to home)
+/cgi-bin/* / 301

@@ -87,8 +87,8 @@ lines.push('# Legacy bbimgs/ image references → /images/');
 lines.push('/bbimgs/* /images/:splat 301');
 lines.push('');
 
-lines.push('# Old cgi-bin (defensive)');
-lines.push('/cgi-bin/* / 410');
+lines.push('# Old cgi-bin (defensive — redirect to home)');
+lines.push('/cgi-bin/* / 301');
 
 const outPath = path.join(__dirname, 'public', '_redirects');
 fs.writeFileSync(outPath, lines.join('\n') + '\n', 'utf8');
