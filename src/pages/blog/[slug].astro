@@ -16,8 +16,14 @@ const { post } = Astro.props;
 const url = `${SITE.url}/blog/${post.slugTR}`;
 const altUrl = `/en/blog/${post.slugEN}`;
 const fullTitle = `${post.title.tr} ${post.titleEm.tr}`.trim();
-const title = `${fullTitle} | Saytad`;
-const description = post.excerpt.tr || post.lead.tr.slice(0, 200);
+// SEO title — short form (just the lead clause + brand) to stay under ~60 chars
+const seoTitle = post.title.tr.replace(/[:：]\s*$/, '').trim();
+const title = `${seoTitle} | Saytad Dergisi`;
+// Trim description to ~155 chars on word boundary
+const rawDesc = post.excerpt.tr || post.lead.tr;
+const description = rawDesc.length <= 160
+  ? rawDesc
+  : rawDesc.slice(0, 155).replace(/\s+\S*$/, '') + '…';
 
 const schema = [
   orgSchema,

@@ -62,7 +62,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/post1-phyllo.webp" alt="İnce yufka katları — mükemmel baklavanın temeli" loading="eager" fetchpriority="high">
+        <img src="/images/post1-phyllo.webp" height="784" width="1168" alt="İnce yufka katları — mükemmel baklavanın temeli" loading="eager" fetchpriority="high">
         <figcaption>Yufka, neredeyse saydam bir inceliğe ulaşana dek açılıp gerilir — ustalaşması yıllar, mükemmelleştirmesi ise bir ömür alan bir beceri.</figcaption>
       </figure>
 
@@ -95,7 +95,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/post1-hero.webp" alt="Gaziantep fıstıkları — Türkiye'nin yeşil altını" loading="lazy">
+        <img src="/images/post1-hero.webp" height="784" width="1168" alt="Gaziantep fıstıkları — Türkiye'nin yeşil altını" loading="lazy">
         <figcaption>Gaziantep fıstıkları, canlı yeşil renkleri ve zengin yağ içerikleri mutlak zirveye ulaştığında tam olgunluktan yaklaşık bir ay önce hasat edilir. Dünyanın başka hiçbir fıstığı bu yeşil tonu doğal olarak üretemez.</figcaption>
       </figure>
 
@@ -124,7 +124,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Post1-3.webp" alt="Katlama süreci — her yufka sayfası sade yağla fırçalanıyor" loading="lazy">
+        <img src="/images/Post1-3.webp" height="768" width="1360" alt="Katlama süreci — her yufka sayfası sade yağla fırçalanıyor" loading="lazy">
         <figcaption>Bir baklava tepsisinin montajı pastacılık mutfağının en meditatif görevlerinden biridir. Her yufka sayfası gözle ortalanır — hiçbir zaman ölçülmez — ve bir sonraki serilmeden önce ılık sade yağla fırçalanır. Basınç veya açıdaki en küçük farklılık bile kırk kat boyunca gözle görülür biçimde birikmektedir.</figcaption>
       </figure>
 
@@ -151,7 +151,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Post1-4.webp" alt="Fırından yeni çıkmış Antep baklavası tepsisi" loading="lazy">
+        <img src="/images/Post1-4.webp" height="784" width="1168" alt="Fırından yeni çıkmış Antep baklavası tepsisi" loading="lazy">
         <figcaption>Doğru şekilde pişirilmiş bir Antep baklavası tepsisi fırından düzgün derin kehribar-altın rengiyle çıkar — ortada soluk yamalar yok, kenarlarda koyulaşmış köşeler yok. Yüzey hâlâ sade yağla parlıyor ve önceden yapılmış elmas kesimler ısı sırasında hamur kabarıp çıtırladığında hafifçe açılmıştır.</figcaption>
       </figure>
 
@@ -176,7 +176,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Post1-5.webp" alt="Dinlendirme sonrası baklava — şerbet tam emilmiş, servis hazır" loading="lazy">
+        <img src="/images/Post1-5.webp" height="832" width="1248" alt="Dinlendirme sonrası baklava — şerbet tam emilmiş, servis hazır" loading="lazy">
         <figcaption>Oda sıcaklığında dört ila sekiz saatlik dinlendirmeden sonra şerbet kılcal etki yoluyla katmanlara tam olarak göç etmiştir ve baklava nihai formuna ulaşmıştır. Bu, tepsiyi servis etmeye hazır olduğu andır.</figcaption>
       </figure>
 
@@ -212,7 +212,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/post1-phyllo.webp" alt="Thin phyllo dough layers — the foundation of perfect baklava" loading="eager" fetchpriority="high">
+        <img src="/images/post1-phyllo.webp" height="784" width="1168" alt="Thin phyllo dough layers — the foundation of perfect baklava" loading="eager" fetchpriority="high">
         <figcaption>The phyllo (yufka) is rolled and stretched until it achieves an almost translucent thinness — a skill that takes years to master and a lifetime to perfect.</figcaption>
       </figure>
 
@@ -253,7 +253,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/post1-hero.webp" alt="Gaziantep pistachios — Turkey's green gold" loading="lazy">
+        <img src="/images/post1-hero.webp" height="784" width="1168" alt="Gaziantep pistachios — Turkey's green gold" loading="lazy">
         <figcaption>Gaziantep pistachios are harvested before full maturity, when their vibrant green colour and rich oil content reach their absolute peak. No other pistachio in the world produces this shade of green naturally.</figcaption>
       </figure>
 
@@ -286,7 +286,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Post1-3.webp" alt="The layering process — each sheet of yufka brushed with clarified butter" loading="lazy">
+        <img src="/images/Post1-3.webp" height="768" width="1360" alt="The layering process — each sheet of yufka brushed with clarified butter" loading="lazy">
         <figcaption>The assembly of a baklava tray is one of the most meditative tasks in the pastry kitchen. Each sheet of yufka is centred by eye — never measured — and brushed with warm clarified butter before the next is laid. Even the slightest variation in pressure or angle accumulates visibly across forty layers. It is the kind of work that rewards practice with perfection, and punishes impatience with a finished product that is slightly, undeniably, wrong.</figcaption>
       </figure>
 
@@ -321,7 +321,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Post1-4.webp" alt="A freshly baked tray of Antep baklava, uniform deep amber-gold from the oven" loading="lazy">
+        <img src="/images/Post1-4.webp" height="784" width="1168" alt="A freshly baked tray of Antep baklava, uniform deep amber-gold from the oven" loading="lazy">
         <figcaption>A properly baked tray of Antep baklava emerges from the oven at a uniform deep amber-gold — no pale patches at the centre, no darkened corners at the edges. The surface still glistens with clarified butter, and the pre-baked diamond cuts have opened fractionally as the pastry puffed and crisped during its time in the heat. The smell at this exact moment — toasted phyllo, warm butter, hint of pistachio — is one of the most instantly recognisable aromas in the Turkish pastry kitchen.</figcaption>
       </figure>
 
@@ -354,7 +354,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Post1-5.webp" alt="Baklava after the resting period — syrup fully absorbed, ready to serve" loading="lazy">
+        <img src="/images/Post1-5.webp" height="832" width="1248" alt="Baklava after the resting period — syrup fully absorbed, ready to serve" loading="lazy">
         <figcaption>After four to eight hours of resting at room temperature, the syrup has fully migrated through the layers via capillary action and the baklava achieves its final form. The top surface carries a gentle, barely perceptible sheen — not wet, not dry — and the bright green pistachios visible in the diamond cuts have deepened slightly in colour as the absorbed moisture softened their outermost layer. This is the moment the tray is ready to be served. Not before. Patience, in baklava-making, is always rewarded.</figcaption>
       </figure>
 
@@ -452,7 +452,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/post2-chocolate.webp" alt="Bitter çikolata parçaları — soğuk baklavanın imza dokunuşu" loading="eager" fetchpriority="high">
+        <img src="/images/post2-chocolate.webp" height="2133" width="1600" alt="Bitter çikolata parçaları — soğuk baklavanın imza dokunuşu" loading="eager" fetchpriority="high">
         <figcaption>İnce bitter çikolata parçaları soğuk baklavanın imza süsü; soğutulmuş pastaya karmaşıklık ve görsel zarafet katıyor.</figcaption>
       </figure>
 
@@ -496,7 +496,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </div>
 
       <figure class="article-img">
-        <img src="/images/Beyaz-Cikolatali-Soguk-Baklava.webp" alt="Beyaz çikolatalı soğuk baklava — Saytad'ın imza çeşidi" loading="lazy">
+        <img src="/images/Beyaz-Cikolatali-Soguk-Baklava.webp" height="2133" width="1600" alt="Beyaz çikolatalı soğuk baklava — Saytad'ın imza çeşidi" loading="lazy">
         <figcaption>Saytad'ın beyaz çikolatalı soğuk baklavası: Gaziantep fıstığıyla katkat yufka, süt-krema şerbetiyle buluşuyor ve kuvertür beyaz çikolata dökülerek tamamlanıyor.</figcaption>
       </figure>
 
@@ -540,7 +540,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/post2-chocolate.webp" alt="Dark chocolate shavings — the finishing touch on cold baklava" loading="eager" fetchpriority="high">
+        <img src="/images/post2-chocolate.webp" height="2133" width="1600" alt="Dark chocolate shavings — the finishing touch on cold baklava" loading="eager" fetchpriority="high">
         <figcaption>Fine dark chocolate shavings are the signature finish of cold baklava, adding complexity and visual elegance to the chilled pastry.</figcaption>
       </figure>
 
@@ -584,7 +584,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </div>
 
       <figure class="article-img">
-        <img src="/images/Beyaz-Cikolatali-Soguk-Baklava.webp" alt="White chocolate cold baklava — Saytad's signature variation" loading="lazy">
+        <img src="/images/Beyaz-Cikolatali-Soguk-Baklava.webp" height="2133" width="1600" alt="White chocolate cold baklava — Saytad's signature variation" loading="lazy">
         <figcaption>Saytad's white chocolate cold baklava: phyllo layered with Gaziantep pistachios, bathed in milk-cream syrup, finished with a couverture white chocolate pour.</figcaption>
       </figure>
 
@@ -647,7 +647,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/post3-baklava-shop.webp" alt="Bir Gaziantep pastanesi" loading="eager" fetchpriority="high">
+        <img src="/images/post3-baklava-shop.webp" height="848" width="1264" alt="Bir Gaziantep pastanesi" loading="eager" fetchpriority="high">
         <figcaption>Gaziantep'te baklava bir tatlıdan öte; her sabah bakır tepsilerde bir sanat sergisiyle özenle sergilenen yaşayan bir miras.</figcaption>
       </figure>
 
@@ -699,7 +699,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Post3-prod.webp" alt="Saytad Baklava üretim mutfağı" loading="lazy">
+        <img src="/images/Post3-prod.webp" height="1450" width="1170" alt="Saytad Baklava üretim mutfağı" loading="lazy">
         <figcaption>Saytad üretim mutfağı; İrfan ve Bülent Özsaygılı'nın yarım asırdır taşıdıkları Gaziantep geleneğine layık bir süreç inşa ettikleri yer.</figcaption>
       </figure>
 
@@ -759,7 +759,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/post3-baklava-shop.webp" alt="Rows of freshly made baklava in a Gaziantep bakery" loading="eager" fetchpriority="high">
+        <img src="/images/post3-baklava-shop.webp" height="848" width="1264" alt="Rows of freshly made baklava in a Gaziantep bakery" loading="eager" fetchpriority="high">
         <figcaption>In Gaziantep, baklava is more than a dessert — it is the city's living heritage, displayed each morning in copper trays with the care of an art exhibition.</figcaption>
       </figure>
 
@@ -811,7 +811,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Post3-prod.webp" alt="The Saytad Baklava kitchen in Istanbul" loading="lazy">
+        <img src="/images/Post3-prod.webp" height="1450" width="1170" alt="The Saytad Baklava kitchen in Istanbul" loading="lazy">
         <figcaption>The Saytad production kitchen, where İrfan and Bülent Özsaygılı built a process worthy of the Gaziantep tradition their family carried for half a century.</figcaption>
       </figure>
 
@@ -890,7 +890,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Hasir_Kadayif.webp" alt="Fıstık ve ceviz — kadayıfın ikiz temeli" loading="lazy">
+        <img src="/images/Hasir_Kadayif.webp" height="1125" width="1500" alt="Fıstık ve ceviz — kadayıfın ikiz temeli" loading="lazy">
         <figcaption>Fıstık ve ceviz, Türk kadayıfında iki büyük fındık geleneğidir. Fıstık tatılık ve renk getirir; ceviz derinlik ve şerbetin tatını dengeleyen hafif bir burukluğu getirir.</figcaption>
       </figure>
 
@@ -970,7 +970,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Fistikli-Burma-Kadayif.webp" alt="Saytad'ın fıstıklı Burma kadayıfı — kadayıf ailesinin taç mücevheri" loading="lazy">
+        <img src="/images/Fistikli-Burma-Kadayif.webp" height="1200" width="1600" alt="Saytad'ın fıstıklı Burma kadayıfı — kadayıf ailesinin taç mücevheri" loading="lazy">
         <figcaption>Saytad'ın Burma kadayıfı: kaba öğütülmüş Gaziantep fıstıkları etrafında sıkı olarak sarılmış rendelenmiş hamur, derin amber rengi olana kadar pişirilmiş ve soğuk şerbetle yıkanmış. Servis etmek için paraçalara kesilmiş.</figcaption>
       </figure>
 
@@ -1018,7 +1018,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Hasir_Kadayif.webp" alt="Pistachios and walnuts — the twin foundations of kadayıf" loading="lazy">
+        <img src="/images/Hasir_Kadayif.webp" height="1125" width="1500" alt="Pistachios and walnuts — the twin foundations of kadayıf" loading="lazy">
         <figcaption>Pistachios and walnuts are the two great nut traditions in Turkish kadayıf. Pistachio brings sweetness and colour; walnut brings depth and a gentle bitterness that balances the syrup.</figcaption>
       </figure>
 
@@ -1098,7 +1098,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </p>
 
       <figure class="article-img">
-        <img src="/images/Fistikli-Burma-Kadayif.webp" alt="Saytad's pistachio Burma kadayıf — the crown jewel of the kadayıf family" loading="lazy">
+        <img src="/images/Fistikli-Burma-Kadayif.webp" height="1200" width="1600" alt="Saytad's pistachio Burma kadayıf — the crown jewel of the kadayıf family" loading="lazy">
         <figcaption>Saytad's Burma kadayıf: shredded dough wrapped tightly around coarse-ground Gaziantep pistachios, baked to a deep amber, and bathed in cold syrup. Cut into coins to serve.</figcaption>
       </figure>
 

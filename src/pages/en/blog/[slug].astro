@@ -16,8 +16,12 @@ const { post } = Astro.props;
 const url = `${SITE.url}/en/blog/${post.slugEN}`;
 const altUrl = `/blog/${post.slugTR}`;
 const fullTitle = `${post.title.en} ${post.titleEm.en}`.trim();
-const title = `${fullTitle} | Saytad`;
-const description = post.excerpt.en || post.lead.en.slice(0, 200);
+const seoTitle = post.title.en.replace(/[:：]\s*$/, '').trim();
+const title = `${seoTitle} | Saytad Magazine`;
+const rawDesc = post.excerpt.en || post.lead.en;
+const description = rawDesc.length <= 160
+  ? rawDesc
+  : rawDesc.slice(0, 155).replace(/\s+\S*$/, '') + '…';
 
 const schema = [
   orgSchema,

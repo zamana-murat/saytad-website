@@ -15,8 +15,19 @@ export function getStaticPaths() {
 const { product } = Astro.props;
 const url = `${SITE.url}/urunler/${product.slugTR}`;
 const altUrl = `/en/products/${product.slugEN}`;
-const title = `${product.nameTR} | Saytad`;
-const description = product.descTR;
+
+const titleSuffixTR: Record<string, string> = {
+  baklava: 'Gaziantep Usulü, Sade Yağ',
+  kadayif: 'Gaziantep Usulü, El Yapımı',
+  cold: 'Soğuk Baklava, Yaz Tatlısı',
+  vegan: 'Bitkisel, Doğal Tatlı',
+};
+const title = `${product.nameTR} — ${titleSuffixTR[product.category]} | Saytad`;
+// Pad description to ~155 chars when needed
+const baseDesc = product.descTR;
+const description = baseDesc.length >= 80
+  ? baseDesc
+  : `${baseDesc}. ${product.priceTR} — İstanbul'da el yapımı, aynı gün teslimat. Saytad Bahçeşehir & Yeşilköy.`;
 
 const schema = [
   orgSchema,
