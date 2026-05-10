@@ -27,3 +27,6 @@ Thumbs.db
 # Cloudflare
 .wrangler/
 .dev.vars
+
+# Image optimization backup (not deployed)
+images-original/
