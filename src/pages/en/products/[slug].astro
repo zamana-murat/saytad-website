@@ -17,12 +17,13 @@ const url = `${SITE.url}/en/products/${product.slugEN}`;
 const altUrl = `/urunler/${product.slugTR}`;
 
 const titleSuffixEN: Record<string, string> = {
-  baklava: 'Handcrafted Gaziantep Baklava',
-  kadayif: 'Gaziantep Style, Pure Ghee',
-  cold: 'Chilled Summer Sweet',
-  vegan: 'Plant-Based, Naturally Sweet',
+  baklava: 'Handcrafted Baklava',
+  kadayif: 'Pure Ghee',
+  cold: 'Cold Baklava',
+  vegan: 'Plant-Based',
 };
-const title = `${product.nameEN} — ${titleSuffixEN[product.category]} | Saytad`;
+const candidateTitleEN = `${product.nameEN} — ${titleSuffixEN[product.category]} | Saytad`;
+const title = candidateTitleEN.length <= 60 ? candidateTitleEN : `${product.nameEN} | Saytad Baklava`;
 const baseDesc = product.descEN;
 const description = baseDesc.length >= 80
   ? baseDesc

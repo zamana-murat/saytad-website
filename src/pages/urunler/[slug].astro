@@ -17,12 +17,14 @@ const url = `${SITE.url}/urunler/${product.slugTR}`;
 const altUrl = `/en/products/${product.slugEN}`;
 
 const titleSuffixTR: Record<string, string> = {
-  baklava: 'Gaziantep Usulü, Sade Yağ',
-  kadayif: 'Gaziantep Usulü, El Yapımı',
-  cold: 'Soğuk Baklava, Yaz Tatlısı',
-  vegan: 'Bitkisel, Doğal Tatlı',
+  baklava: 'Gaziantep Usulü',
+  kadayif: 'El Yapımı',
+  cold: 'Soğuk Baklava',
+  vegan: 'Vegan Tatlı',
 };
-const title = `${product.nameTR} — ${titleSuffixTR[product.category]} | Saytad`;
+// Only add suffix if total stays under 60 chars; otherwise keep title clean
+const candidateTitle = `${product.nameTR} — ${titleSuffixTR[product.category]} | Saytad`;
+const title = candidateTitle.length <= 60 ? candidateTitle : `${product.nameTR} | Saytad Baklava`;
 // Pad description to ~155 chars when needed
 const baseDesc = product.descTR;
 const description = baseDesc.length >= 80
