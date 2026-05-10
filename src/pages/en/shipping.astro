@@ -1,0 +1,79 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/en/shipping`;
+const title = 'Shipping & Delivery Policy | Saytad';
+const description = 'Same-day delivery in Istanbul, nationwide shipping, international orders, packaging and return conditions.';
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'en' }),
+  breadcrumbSchema([
+    { name: 'Home', url: `${SITE.url}/en` },
+    { name: 'Shipping Policy', url },
+  ]),
+];
+---
+<Layout
+  lang="en"
+  title={title}
+  description={description}
+  path="/en/shipping"
+  altPath="/kargo"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/static-pages.css" />
+
+  <section class="static-hero">
+    <p class="static-hero-eyebrow">Delivery</p>
+    <h1 class="static-hero-title">Shipping <em>& Delivery</em></h1>
+    <p class="static-hero-sub">Same-day in Istanbul, nationwide shipping, international orders and packaging details.</p>
+  </section>
+
+  <div class="static-wrap">
+    <h2>Same-Day Delivery in Istanbul</h2>
+    <p>
+      Orders placed by 14:00 are delivered the same day from our Bahçeşehir or Yeşilköy kitchen by motorcycle courier. Later orders are made fresh and dispatched the next day.
+    </p>
+    <ul>
+      <li>Istanbul European side: free (orders ₺3,000 and above)</li>
+      <li>Istanbul Asian side: free (orders ₺3,000 and above)</li>
+      <li>Below ₺3,000: delivery fee based on distance</li>
+    </ul>
+
+    <h2>Nationwide Shipping (Turkey)</h2>
+    <p>
+      We ship throughout Turkey via partner courier services. Orders are produced and dispatched within 1 business day. Standard delivery is 1-3 business days.
+    </p>
+    <ul>
+      <li>Cold-chain products (cold baklava) are packed in thermal packaging</li>
+      <li>Cooling gel packs are added during summer months</li>
+      <li>Orders placed Saturday after 12:00 noon and Sunday ship Monday</li>
+    </ul>
+
+    <h2>International Shipping</h2>
+    <p>
+      For international orders, please contact us at <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Packaging and customs processes vary by destination country.
+    </p>
+
+    <h2>Packaging</h2>
+    <p>
+      All baklava is packed in food-grade boxes with protective lining. Gift orders may use gold cardboard boxes with a personal card and silk ribbon. Corporate orders can include branded packaging on request.
+    </p>
+
+    <h2>Returns & Exchanges</h2>
+    <p>
+      Due to the nature of fresh food products, returns are not accepted. If the product arrives damaged or incorrect, contact us within 24 hours of delivery with photos and we will arrange replacement or full refund.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Order tracking or delivery questions: {SITE.phoneDisplay} · <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+    </p>
+
+    <p class="static-meta">Last updated: May 10, 2026</p>
+  </div>
+</Layout>

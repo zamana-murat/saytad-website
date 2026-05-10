@@ -1,0 +1,146 @@
+---
+import { PRODUCTS, type ProductCategory } from '@data/products';
+import { ROUTES, type Lang } from '@data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const r = ROUTES[lang];
+const isTR = lang === 'tr';
+
+const t = isTR
+  ? {
+      breadcrumbHome: 'Ana Sayfa',
+      breadcrumbHere: 'Ürünlerimiz',
+      heroTag: 'Tam Koleksiyon',
+      heroTitle: 'Ürünlerimiz',
+      heroTitleEm: "2007'den beri İstanbul'da her gün el yapımı",
+      heroSubA: 'Dört kategoride 26 çeşit — baklava, kadayıf, soğuk baklava ve vegan.',
+      heroSubB: 'Her parça o sabah taze hazırlanır. Hiçbiri ertesi gün satılmaz.',
+      navLabel: 'Ürün kategorileri',
+      navItems: { baklava: 'Baklava', kadayif: 'Kadayıf', cold: 'Soğuk Baklava', vegan: 'Vegan' },
+      sectionLabels: { baklava: 'Klasik', kadayif: 'Tel Hamur', cold: 'Soğutulmuş & Çağdaş', vegan: '%100 Bitkisel' },
+      sectionTitles: { baklava: 'Baklava', kadayif: 'Kadayıf', cold: 'Soğuk Baklava', vegan: 'Vegan' },
+      countSuffix: 'çeşit',
+      ctaEyebrow: 'Bugün Sipariş Ver',
+      ctaTitle: 'Sipariş Vermeye',
+      ctaTitleEm: 'Hazır mısınız?',
+      ctaSubA: 'İstanbul içi aynı gün teslimat · Yurt genelinde kargo mevcut',
+      ctaSubB: 'Kurumsal ve toplu siparişler için bizimle iletişime geçin.',
+      ctaPrimary: 'Sipariş Ver',
+      ctaSecondary: 'Kurumsal & Toplu Sipariş',
+    }
+  : {
+      breadcrumbHome: 'Home',
+      breadcrumbHere: 'Our Products',
+      heroTag: 'Full Collection',
+      heroTitle: 'Our Products',
+      heroTitleEm: 'Handcrafted in Istanbul daily since 2007',
+      heroSubA: 'Twenty-six varieties across four categories — baklava, kadayıf, cold baklava and vegan.',
+      heroSubB: 'Every piece is made fresh that morning. None is sold the next day.',
+      navLabel: 'Product categories',
+      navItems: { baklava: 'Baklava', kadayif: 'Kadayıf', cold: 'Cold Baklava', vegan: 'Vegan' },
+      sectionLabels: { baklava: 'Classic', kadayif: 'Shredded Wheat', cold: 'Chilled & Modern', vegan: '100% Plant-Based' },
+      sectionTitles: { baklava: 'Baklava', kadayif: 'Kadayıf', cold: 'Cold Baklava', vegan: 'Vegan' },
+      countSuffix: 'varieties',
+      ctaEyebrow: 'Order Today',
+      ctaTitle: 'Ready to',
+      ctaTitleEm: 'Order?',
+      ctaSubA: 'Same-day delivery in Istanbul · Nationwide shipping available',
+      ctaSubB: 'Contact us for corporate and bulk orders.',
+      ctaPrimary: 'Place an Order',
+      ctaSecondary: 'Corporate & Bulk',
+    };
+
+const categories: { id: ProductCategory; anchor: string }[] = [
+  { id: 'baklava', anchor: 'baklava' },
+  { id: 'kadayif', anchor: 'kadayif' },
+  { id: 'cold', anchor: isTR ? 'soguk' : 'cold' },
+  { id: 'vegan', anchor: 'vegan' },
+];
+---
+<section class="products-hero">
+  <div class="products-hero-bg" style="background-image: url('/images/FistikliBaklavaMainpage.webp');"></div>
+  <div class="products-hero-overlay"></div>
+  <div class="products-hero-content">
+    <div class="products-breadcrumb">
+      <a href={r.home}>{t.breadcrumbHome}</a>
+      <span>/</span>
+      <span>{t.breadcrumbHere}</span>
+    </div>
+    <div class="products-hero-tag">{t.heroTag}</div>
+    <h1 class="products-hero-title">
+      {t.heroTitle}
+      <em>{t.heroTitleEm}</em>
+    </h1>
+    <p class="products-hero-sub">{t.heroSubA}<br />{t.heroSubB}</p>
+  </div>
+</section>
+
+<nav class="cat-nav" id="catNav" aria-label={t.navLabel}>
+  {categories.map((c) => (
+    <a href={`#${c.anchor}`} class="cat-nav-link">{t.navItems[c.id]}</a>
+  ))}
+</nav>
+
+{categories.map((c) => {
+  const items = PRODUCTS.filter((p) => p.category === c.id);
+  return (
+    <section class="products-section" id={c.anchor}>
+      <div class="products-section-header reveal">
+        <div>
+          <p class="products-section-label">{t.sectionLabels[c.id]}</p>
+          <h2 class="products-section-title">{t.sectionTitles[c.id]}</h2>
+        </div>
+        <span class="products-section-count">{items.length} {t.countSuffix}</span>
+      </div>
+      <div class="menu-grid">
+        {items.map((p) => {
+          const slug = isTR ? p.slugTR : p.slugEN;
+          const name = isTR ? p.nameTR : p.nameEN;
+          const desc = isTR ? p.descTR : p.descEN;
+          const price = isTR ? p.priceTR : p.priceEN;
+          const style = p.image
+            ? `background-image: url('${p.image}'); background-position: ${p.imagePos ?? 'center'};`
+            : undefined;
+          return (
+            <a href={r.product(slug)} class="menu-item" style={style}>
+              <div>
+                <p class="menu-item-name">{name}</p>
+                <p class="menu-item-desc">{desc}</p>
+              </div>
+              <p class="menu-item-price">{price}</p>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  );
+})}
+
+<section class="products-cta">
+  <p class="products-cta-eyebrow">{t.ctaEyebrow}</p>
+  <h2 class="products-cta-title">{t.ctaTitle} <em>{t.ctaTitleEm}</em></h2>
+  <p class="products-cta-sub">{t.ctaSubA}<br />{t.ctaSubB}</p>
+  <div class="products-cta-actions">
+    <a href={r.contact} class="btn-gold">{t.ctaPrimary}</a>
+    <a href={r.contact} class="btn-outline">{t.ctaSecondary}</a>
+  </div>
+</section>
+
+<script is:inline>
+  const sections = document.querySelectorAll('.products-section[id]');
+  const navLinks = document.querySelectorAll('.cat-nav-link');
+  const secObs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove('active'));
+        const active = document.querySelector('.cat-nav-link[href="#' + e.target.id + '"]');
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach((s) => secObs.observe(s));
+</script>

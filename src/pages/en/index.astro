@@ -1,0 +1,62 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ProductMenu from '@components/ProductMenu.astro';
+import Marquee from '@components/Marquee.astro';
+import Featured from '@components/Featured.astro';
+import Categories from '@components/Categories.astro';
+import GiftBanner from '@components/GiftBanner.astro';
+import About from '@components/About.astro';
+import ContactForm from '@components/ContactForm.astro';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/en`;
+const title = 'Pistachio Baklava – Handcrafted Gaziantep Style | Saytad';
+const description =
+  'Saytad baklava: handcrafted pistachio, walnut, cold and vegan baklava. Pure ghee butter and Gaziantep pistachios. Same-day delivery in Istanbul.';
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'en', dateModified: '2026-05-10' }),
+  breadcrumbSchema([{ name: 'Home', url }]),
+];
+---
+<Layout
+  lang="en"
+  title={title}
+  description={description}
+  path="/en"
+  altPath="/"
+  schema={schema}
+  dateModified="2026-05-10"
+>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Handcrafted in Gaziantep Tradition</div>
+      <h1>Taste the Art <em>of Baklava</em></h1>
+      <p class="hero-desc">
+        Layer by layer, hand-rolled with care. Our baklava carries centuries of tradition in every golden,
+        syrup-kissed bite. Made with ghee butter, the finest pistachios, and a great deal of love.
+      </p>
+      <div class="hero-actions">
+        <a href="#categories" class="btn-gold">Explore Our Sweets</a>
+        <a href="#about" class="btn-outline">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <ProductMenu lang="en" />
+  <Marquee lang="en" />
+  <Featured lang="en" />
+  <Categories lang="en" />
+  <GiftBanner lang="en" />
+  <About lang="en" />
+  <ContactForm lang="en" />
+</Layout>

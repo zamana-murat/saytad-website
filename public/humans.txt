@@ -1,0 +1,16 @@
+/* TEAM */
+Brand: Saytad Baklava
+Est.: 2007
+Location: Istanbul & Gaziantep, Turkey
+Contact: info@saytad.com
+Phone: +90 539 513 8003
+
+/* SITE */
+Language: Turkish, English
+Standards: HTML5, CSS3, JSON-LD, Schema.org
+Viewport: mobile-first responsive design
+
+/* THANKS */
+Craft tradition passed through generations since Gaziantep.
+Made with ghee butter, stone-ground Gaziantep pistachios
+and a great deal of love.

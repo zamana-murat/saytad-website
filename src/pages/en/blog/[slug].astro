@@ -1,0 +1,55 @@
+---
+import Layout from '@layouts/Layout.astro';
+import BlogPostBody from '@components/BlogPostBody.astro';
+import { BLOG_POSTS } from '@data/blog';
+import { orgSchema, websiteSchema, articleSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+export function getStaticPaths() {
+  return BLOG_POSTS.map((p) => ({
+    params: { slug: p.slugEN },
+    props: { post: p },
+  }));
+}
+
+const { post } = Astro.props;
+const url = `${SITE.url}/en/blog/${post.slugEN}`;
+const altUrl = `/blog/${post.slugTR}`;
+const fullTitle = `${post.title.en} ${post.titleEm.en}`.trim();
+const title = `${fullTitle} | Saytad`;
+const description = post.excerpt.en || post.lead.en.slice(0, 200);
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  articleSchema({
+    url,
+    headline: fullTitle,
+    description,
+    image: `${SITE.url}${post.heroImage}`,
+    datePublished: post.isoDate,
+    author: post.author.en,
+    inLanguage: 'en',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: `${SITE.url}/en` },
+    { name: 'Magazine', url: `${SITE.url}/en/blog` },
+    { name: fullTitle, url },
+  ]),
+];
+---
+<Layout
+  lang="en"
+  title={title}
+  description={description}
+  path={`/en/blog/${post.slugEN}`}
+  altPath={altUrl}
+  ogImage={post.heroImage}
+  ogImageAlt={fullTitle}
+  ogType="article"
+  schema={schema}
+  dateModified={post.isoDate}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/blog.css" />
+  <BlogPostBody post={post} lang="en" />
+</Layout>

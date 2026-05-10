@@ -1,0 +1,26 @@
+---
+import type { Lang } from '@data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const phrases = lang === 'tr'
+  ? ['Geleneksel Baklava', 'El Yapımı Kadayıf', 'Soğuk Baklava', 'Vegan Baklava', 'Su Böreği', 'Hediye Koleksiyonları', 'Gaziantep Fıstığı', 'Sade Yağ, Saf Gelenek']
+  : ['Traditional Baklava', 'Handmade Kadayıf', 'Cold Baklava', 'Vegan Baklava', 'Su Böreği', 'Gift Collections', 'Gaziantep Pistachios', 'Ghee Butter, Pure Tradition'];
+
+// Double for seamless loop
+const track = [...phrases, ...phrases];
+---
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    {track.map((p, i) => (
+      <>
+        <span>{p}</span>
+        <span class="dot">✦</span>
+      </>
+    ))}
+  </div>
+</div>

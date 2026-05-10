@@ -1,0 +1,72 @@
+---
+import { ROUTES, type Lang } from '@data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const r = ROUTES[lang];
+
+const t = lang === 'tr'
+  ? {
+      eyebrow: 'Hikayemiz',
+      title: 'Nesilden Nesile',
+      titleEm: 'Aktarılan Tarif',
+      body: [
+        'Saytad Baklava, dünyanın baklava başkenti Gaziantep\'te nesiller boyu süregelen bir aile geleneğinden doğdu. Bugün İstanbul\'da hazırladığımız her tepsiye o tarifleri, o sabrı ve o sevgiyi taşıyoruz.',
+        'Sadece sade yağ, Gaziantep\'ten taş öğütme fıstık ve el açması yufka kullanıyoruz. Kısa yol yok. Taviz yok. Sadece bize öğretildiği gibi zanaat — her gün taze olarak sizi bekliyor.',
+      ],
+      caption: '"Nesilden nesile aktarılan zanaat"',
+      stats: [
+        { num: '2007', lbl: 'Kur. İstanbul – Gaziantep' },
+        { num: '40+', lbl: 'Çeşit' },
+        { num: '6314', lbl: 'Mutlu Müşteri' },
+      ],
+      cta: 'Hikayemiz',
+      alt: 'Saytad Baklava ustaları',
+    }
+  : {
+      eyebrow: 'Our Story',
+      title: 'A Recipe Passed',
+      titleEm: 'Through Generations',
+      body: [
+        'Saytad Baklava was born from a family tradition stretching back generations in Gaziantep, the baklava capital of the world. We carry those same recipes, that same patience, and that same love into every tray we prepare today in Istanbul.',
+        'We use only ghee butter, stone-ground pistachios from Gaziantep, and hand-rolled phyllo. No shortcuts. No compromises. Just the craft, exactly as it was taught to us — brought to you fresh, every single day.',
+      ],
+      caption: '"Craft passed through generations"',
+      stats: [
+        { num: '2007', lbl: 'Est. Istanbul – Gaziantep' },
+        { num: '40+', lbl: 'Varieties' },
+        { num: '6314', lbl: 'Satisfied Customers' },
+      ],
+      cta: 'Our Story',
+      alt: 'Saytad Baklava artisans',
+    };
+---
+<div class="about" id="about">
+  <div class="about-inner">
+    <div class="about-photo">
+      <img src="/images/P1010992.webp" alt={t.alt} loading="lazy" width="1200" height="900" />
+      <div class="about-photo-caption">
+        <p>{t.caption}</p>
+      </div>
+    </div>
+    <div class="about-content reveal">
+      <p class="section-label" style="color:var(--gold);">{t.eyebrow}</p>
+      <h2 class="section-title section-title--light">{t.title} <em>{t.titleEm}</em></h2>
+      <p class="about-text">
+        {t.body[0]}<br /><br />{t.body[1]}
+      </p>
+      <div class="about-stats">
+        {t.stats.map((s) => (
+          <div class="stat">
+            <p class="stat-num">{s.num}</p>
+            <p class="stat-lbl">{s.lbl}</p>
+          </div>
+        ))}
+      </div>
+      <a href={r.story} class="btn-gold" style="align-self:flex-start;">{t.cta}</a>
+    </div>
+  </div>
+</div>

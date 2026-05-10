@@ -1,0 +1,135 @@
+---
+import type { BlogPost } from '@data/blog';
+import { BLOG_POSTS } from '@data/blog';
+import { ROUTES, type Lang } from '@data/site';
+
+interface Props {
+  post: BlogPost;
+  lang: Lang;
+}
+
+const { post, lang } = Astro.props;
+const r = ROUTES[lang];
+const isTR = lang === 'tr';
+
+const title = isTR ? post.title.tr : post.title.en;
+const titleEm = isTR ? post.titleEm.tr : post.titleEm.en;
+const tag = isTR ? post.tag.tr : post.tag.en;
+const date = isTR ? post.date.tr : post.date.en;
+const readTime = isTR ? post.readTime.tr : post.readTime.en;
+const author = isTR ? post.author.tr : post.author.en;
+const lead = isTR ? post.lead.tr : post.lead.en;
+const body = isTR ? post.body.tr : post.body.en;
+
+const breadcrumbHome = isTR ? 'Dergi' : 'Magazine';
+const relatedLabel = isTR ? 'Dergide Ayrıca' : 'More From the Magazine';
+const relatedTitle = isTR ? 'Okumaya' : 'Keep';
+const relatedTitleEm = isTR ? 'Devam Et' : 'Reading';
+
+const relatedPosts = post.related
+  .map((relSlug) => BLOG_POSTS.find((p) => p.slugEN === relSlug))
+  .filter((p): p is BlogPost => Boolean(p));
+
+const nlLabel = isTR ? 'Haberdar Olun' : 'Stay In the Loop';
+const nlTitle = isTR ? 'Yeni Yazılar, Mevsimsel Tatlılar &' : 'New Posts, Seasonal Sweets &';
+const nlTitleEm = isTR ? 'Tatlı Sürprizler' : 'Sweet Surprises';
+const nlSub = isTR
+  ? 'Tarifler, perde arkası hikayeler ve özel teklifler için bültenimize abone olun.'
+  : 'Subscribe for recipes, behind-the-scenes stories and special offers.';
+const nlPlaceholder = isTR ? 'eposta@adresiniz.com' : 'your@email.com';
+const nlBtn = isTR ? 'Abone Ol' : 'Subscribe';
+const nlBtnDone = isTR ? '✓ Abone Oldunuz!' : '✓ Subscribed!';
+---
+<div class="reading-bar" id="readingBar"></div>
+
+<section class="post-hero">
+  <div class="post-hero-bg" style={`background-image: url('${post.heroImage}');`}></div>
+  <div class="post-hero-overlay"></div>
+  <div class="post-hero-content">
+    <div class="post-breadcrumb">
+      <a href={r.blog}>{breadcrumbHome}</a>
+      <span>/</span>
+      <span>{tag}</span>
+    </div>
+    <div class="post-tag">{tag}</div>
+    <h1 class="post-hero-title">{title}<br /><em>{titleEm}</em></h1>
+    <div class="post-hero-meta">
+      <span>{date}</span>
+      <div class="dot"></div>
+      <span>{readTime}</span>
+      <div class="dot"></div>
+      <span>{author}</span>
+    </div>
+  </div>
+</section>
+
+<article>
+  <div class="article-wrap">
+    {lead && <p class="article-lead">{lead}</p>}
+    <div class="article-body" set:html={body}></div>
+  </div>
+</article>
+
+{relatedPosts.length > 0 && (
+  <section class="related">
+    <div class="related-inner">
+      <p class="related-label">{relatedLabel}</p>
+      <h2 class="related-title">{relatedTitle} <em>{relatedTitleEm}</em></h2>
+      <div class="related-grid">
+        {relatedPosts.map((rp) => {
+          const url = isTR ? r.blogPost(rp.slugTR) : r.blogPost(rp.slugEN);
+          const rTag = isTR ? rp.tag.tr : rp.tag.en;
+          const rTitle = `${isTR ? rp.title.tr : rp.title.en} ${isTR ? rp.titleEm.tr : rp.titleEm.en}`.trim();
+          return (
+            <a href={url} class="related-card">
+              <div class="related-card-img"><img src={rp.cardImage} alt={rTitle} loading="lazy" width="800" height="600" /></div>
+              <p class="related-card-tag">{rTag}</p>
+              <p class="related-card-title">{rTitle}</p>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+)}
+
+<div class="newsletter-band">
+  <p class="nl-label">{nlLabel}</p>
+  <h3 class="nl-title">{nlTitle} <em>{nlTitleEm}</em></h3>
+  <p class="nl-sub">{nlSub}</p>
+  <form class="nl-form" id="nlForm" data-done={nlBtnDone}>
+    <input type="email" class="nl-input" placeholder={nlPlaceholder} required />
+    <button type="submit" class="nl-btn" id="nl-btn">{nlBtn}</button>
+  </form>
+</div>
+
+<script is:inline>
+  // Reading progress bar
+  (function () {
+    const bar = document.getElementById('readingBar');
+    if (!bar) return;
+    const update = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      bar.style.width = pct + '%';
+    };
+    document.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  // Newsletter (placeholder — visual only; wired to backend in Phase 7)
+  (function () {
+    const form = document.getElementById('nlForm');
+    const btn = document.getElementById('nl-btn');
+    if (!form || !btn) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      btn.textContent = form.getAttribute('data-done');
+      btn.style.background = '#6a9e4f';
+      btn.style.cursor = 'default';
+      const input = form.querySelector('.nl-input');
+      if (input) input.value = '';
+    });
+  })();
+</script>

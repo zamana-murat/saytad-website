@@ -1,0 +1,153 @@
+---
+import { BLOG_POSTS } from '@data/blog';
+import { ROUTES, type Lang } from '@data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const r = ROUTES[lang];
+const isTR = lang === 'tr';
+
+const t = isTR
+  ? {
+      heroEyebrow: 'Saytad Dergisi',
+      heroTitle: 'Bir Lezzetin',
+      heroTitleEm: 'Hikayesi',
+      heroSub: 'Zanaat, gelenek ve Türk pastacılığının tatlı sanatı — Saytad blog. Saytad mutfağından.',
+      sectionLabel: 'Son Yazılar',
+      sectionTitle: 'Hikayeyi',
+      sectionTitleEm: 'Tadın',
+      readMore: 'Devamını Oku',
+      readFull: 'Yazının Tamamını Oku',
+      readGuide: 'Rehberin Tamamını Oku',
+      nlLabel: 'Haberdar Olun',
+      nlTitle: 'Yeni Yazılar, Mevsimsel Tatlılar &',
+      nlTitleEm: 'Tatlı Sürprizler',
+      nlSub: 'Tarifler, perde arkası hikayeler ve özel teklifler için bültenimize abone olun.',
+      nlPlaceholder: 'eposta@adresiniz.com',
+      nlBtn: 'Abone Ol',
+      nlDone: '✓ Abone Oldunuz!',
+    }
+  : {
+      heroEyebrow: 'Saytad Magazine',
+      heroTitle: 'Stories of',
+      heroTitleEm: 'Sweet Tradition',
+      heroSub: 'Craft, tradition and the sweet art of Turkish pastry — the Saytad blog. From the Saytad kitchen.',
+      sectionLabel: 'Latest Posts',
+      sectionTitle: 'Taste the',
+      sectionTitleEm: 'Story',
+      readMore: 'Read More',
+      readFull: 'Read the Full Post',
+      readGuide: 'Read the Full Guide',
+      nlLabel: 'Stay In the Loop',
+      nlTitle: 'New Posts, Seasonal Sweets &',
+      nlTitleEm: 'Sweet Surprises',
+      nlSub: 'Subscribe for recipes, behind-the-scenes stories and special offers.',
+      nlPlaceholder: 'your@email.com',
+      nlBtn: 'Subscribe',
+      nlDone: '✓ Subscribed!',
+    };
+---
+<section class="blog-hero">
+  <div class="blog-hero-bg"></div>
+  <div class="blog-hero-overlay"></div>
+  <div class="blog-hero-content">
+    <p class="blog-hero-eyebrow">{t.heroEyebrow}</p>
+    <h1 class="blog-hero-title">{t.heroTitle} <em>{t.heroTitleEm}</em></h1>
+    <p class="blog-hero-sub">{t.heroSub}</p>
+  </div>
+</section>
+
+<section class="blog-section">
+  <div class="blog-section-header reveal">
+    <p class="section-label">{t.sectionLabel}</p>
+    <h2 class="section-title">{t.sectionTitle} <em>{t.sectionTitleEm}</em></h2>
+  </div>
+
+  <div class="blog-grid">
+    {BLOG_POSTS.map((post) => {
+      const slug = isTR ? post.slugTR : post.slugEN;
+      const url = r.blogPost(slug);
+      const tag = isTR ? post.tag.tr : post.tag.en;
+      const overlayTag = isTR ? post.overlayTag.tr : post.overlayTag.en;
+      const fullTitle = `${isTR ? post.title.tr : post.title.en} ${isTR ? post.titleEm.tr : post.titleEm.en}`.trim();
+      const excerpt = isTR ? post.excerpt.tr : post.excerpt.en;
+      const date = isTR ? post.date.tr : post.date.en;
+      const readTime = isTR ? post.readTime.tr : post.readTime.en;
+      const author = isTR ? post.author.tr : post.author.en;
+      const readLink = post.featured ? t.readFull : post.wide ? t.readGuide : t.readMore;
+      const cardClass = `blog-card${post.featured ? ' blog-card--featured' : ''}${post.wide ? ' blog-card--wide' : ''} reveal`;
+      const tagClass = post.featured ? 'blog-card-tag blog-card-tag--light' : 'blog-card-tag';
+
+      if (post.wide) {
+        return (
+          <article class={cardClass}>
+            <div class="blog-card-split">
+              <div class="blog-card-img blog-card-img--split">
+                <img src={post.cardImage} alt={fullTitle} loading="lazy" width="800" height="600" />
+                <span class="img-overlay-tag">{overlayTag}</span>
+              </div>
+              <div class="blog-card-body blog-card-body--cream">
+                <span class={tagClass}>{tag}</span>
+                <a href={url} class="blog-card-title">{fullTitle}</a>
+                <p class="blog-card-excerpt">{excerpt}</p>
+                <div class="blog-card-meta">
+                  <span>{date}</span><div class="meta-dot"></div><span>{readTime}</span>
+                  {author && <><div class="meta-dot"></div><span>{author}</span></>}
+                </div>
+                <a href={url} class="blog-read-link">{readLink}</a>
+              </div>
+            </div>
+          </article>
+        );
+      }
+
+      return (
+        <article class={cardClass}>
+          <div class="blog-card-img">
+            <img src={post.cardImage} alt={fullTitle} loading="lazy" width="800" height="600" />
+            <span class="img-overlay-tag">{overlayTag}</span>
+          </div>
+          <div class="blog-card-body">
+            <span class={tagClass}>{tag}</span>
+            <a href={url} class="blog-card-title">{fullTitle}</a>
+            <p class="blog-card-excerpt">{excerpt}</p>
+            <div class="blog-card-meta">
+              <span>{date}</span><div class="meta-dot"></div><span>{readTime}</span>
+              {post.featured && author && <><div class="meta-dot"></div><span>{author}</span></>}
+            </div>
+            <a href={url} class="blog-read-link">{readLink}</a>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</section>
+
+<div class="newsletter-band">
+  <p class="section-label">{t.nlLabel}</p>
+  <h3 class="nl-title">{t.nlTitle} <em>{t.nlTitleEm}</em></h3>
+  <p class="nl-sub">{t.nlSub}</p>
+  <form class="nl-form" id="nlForm" data-done={t.nlDone}>
+    <input type="email" class="nl-input" placeholder={t.nlPlaceholder} required />
+    <button type="submit" class="nl-btn" id="nl-btn">{t.nlBtn}</button>
+  </form>
+</div>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById('nlForm');
+    const btn = document.getElementById('nl-btn');
+    if (!form || !btn) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      btn.textContent = form.getAttribute('data-done');
+      btn.style.background = '#6a9e4f';
+      btn.style.cursor = 'default';
+      const input = form.querySelector('.nl-input');
+      if (input) input.value = '';
+    });
+  })();
+</script>

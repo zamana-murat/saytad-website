@@ -1,0 +1,35 @@
+---
+import { ROUTES, type Lang } from '@data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const r = ROUTES[lang];
+
+const t = lang === 'tr'
+  ? {
+      eyebrow: 'Sevdikleriniz İçin',
+      title: 'Her Anı Daha',
+      titleEm: 'Tatlı Yapın',
+      body: 'Hediye kutularımız özenle paketlenir ve dünyaya gönderilir — taze, güvenli ve unutulmaz. Her kutlama için mükemmel bir jest.',
+      cta: 'Hediye Kutusu Sipariş Et',
+    }
+  : {
+      eyebrow: 'For Your Loved Ones',
+      title: 'Make Every Occasion',
+      titleEm: 'Sweeter',
+      body: 'Our gift boxes are lovingly packed and shipped worldwide — fresh, secure, and unforgettable. The perfect gesture for any celebration.',
+      cta: 'Order a Gift Box',
+    };
+---
+<div class="gift-banner">
+  <div class="gift-banner-bg" style="background-image: url('/images/Beyaz-Cikolatali-Soguk-Baklava.webp');"></div>
+  <div class="gift-banner-content reveal">
+    <p class="section-label">{t.eyebrow}</p>
+    <h2 class="section-title section-title--light">{t.title} <em>{t.titleEm}</em></h2>
+    <p class="gift-banner-text">{t.body}</p>
+    <a href={r.contact} class="btn-gold">{t.cta}</a>
+  </div>
+</div>

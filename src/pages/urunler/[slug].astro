@@ -1,0 +1,51 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ProductDetail from '@components/ProductDetail.astro';
+import { PRODUCTS } from '@data/products';
+import { orgSchema, websiteSchema, productSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+export function getStaticPaths() {
+  return PRODUCTS.map((p) => ({
+    params: { slug: p.slugTR },
+    props: { product: p },
+  }));
+}
+
+const { product } = Astro.props;
+const url = `${SITE.url}/urunler/${product.slugTR}`;
+const altUrl = `/en/products/${product.slugEN}`;
+const title = `${product.nameTR} | Saytad`;
+const description = product.descTR;
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  productSchema({
+    name: product.nameTR,
+    description,
+    image: `${SITE.url}${product.image || '/images/FistikliBaklavaMainpage.webp'}`,
+    category: 'Türk Tatlıları / Baklava',
+    inLanguage: 'tr',
+  }),
+  breadcrumbSchema([
+    { name: 'Ana Sayfa', url: `${SITE.url}/` },
+    { name: 'Ürünler', url: `${SITE.url}/urunler` },
+    { name: product.nameTR, url },
+  ]),
+];
+---
+<Layout
+  lang="tr"
+  title={title}
+  description={description}
+  path={`/urunler/${product.slugTR}`}
+  altPath={altUrl}
+  ogImage={product.image || undefined}
+  ogImageAlt={`Saytad ${product.nameTR}`}
+  ogType="article"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/products.css" />
+  <ProductDetail product={product} lang="tr" />
+</Layout>

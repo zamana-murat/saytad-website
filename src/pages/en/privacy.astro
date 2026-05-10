@@ -1,0 +1,91 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/en/privacy`;
+const title = 'Privacy Policy | Saytad';
+const description = 'How Saytad collects, processes and protects your personal data under KVKK and GDPR.';
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'en' }),
+  breadcrumbSchema([
+    { name: 'Home', url: `${SITE.url}/en` },
+    { name: 'Privacy Policy', url },
+  ]),
+];
+---
+<Layout
+  lang="en"
+  title={title}
+  description={description}
+  path="/en/privacy"
+  altPath="/gizlilik"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/static-pages.css" />
+
+  <section class="static-hero">
+    <p class="static-hero-eyebrow">Legal</p>
+    <h1 class="static-hero-title">Privacy <em>Policy</em></h1>
+    <p class="static-hero-sub">How we process and protect your personal data, and your rights.</p>
+  </section>
+
+  <div class="static-wrap">
+    <h2>Data Controller</h2>
+    <p>
+      Saytad Baklava (hereinafter "Saytad" or "we") is the data controller under Turkey's Personal Data Protection Law (KVKK, Law No. 6698) and the EU General Data Protection Regulation (GDPR).
+    </p>
+    <p>
+      Address: Saytad Bahçeşehir · Saytad Yeşilköy, Istanbul<br />
+      Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
+      Phone: {SITE.phoneDisplay}
+    </p>
+
+    <h2>What We Collect</h2>
+    <ul>
+      <li><strong>Contact form:</strong> name, email, optional phone, message content.</li>
+      <li><strong>Order processing:</strong> delivery address, billing details (for corporate orders).</li>
+      <li><strong>Automatic:</strong> browser type, anonymous traffic statistics (Cloudflare Web Analytics — cookieless, no personal data).</li>
+    </ul>
+
+    <h2>How We Use It</h2>
+    <ul>
+      <li>To respond to your enquiries</li>
+      <li>To prepare and deliver your orders</li>
+      <li>To meet legal obligations (invoicing, tax)</li>
+      <li>To improve service quality (anonymous, aggregated statistics)</li>
+    </ul>
+
+    <h2>Retention</h2>
+    <p>
+      Contact form records are retained for a maximum of 12 months after resolution. Order and invoice records are retained for 10 years as required by law.
+    </p>
+
+    <h2>Data Sharing</h2>
+    <p>
+      We do not sell or share your personal data with third parties except as legally required. For deliveries, only the necessary shipping information is shared with the courier. Form submissions are transmitted via Resend (EU data centre).
+    </p>
+
+    <h2>Your Rights (KVKK Art. 11 / GDPR)</h2>
+    <ul>
+      <li>Be informed about data processing</li>
+      <li>Request information on whether your data has been processed</li>
+      <li>Request correction, deletion or destruction</li>
+      <li>Learn about third parties data has been transferred to</li>
+      <li>Object to processing</li>
+    </ul>
+    <p>
+      To exercise these rights, please email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. We respond within 30 days.
+    </p>
+
+    <h2>Cookies</h2>
+    <p>
+      Saytad.com does not use cookies. We use Cloudflare Web Analytics for traffic analysis, which operates cookieless and does not collect personal data.
+    </p>
+
+    <p class="static-meta">Last updated: May 10, 2026</p>
+  </div>
+</Layout>

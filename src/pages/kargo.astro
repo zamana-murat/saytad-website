@@ -1,0 +1,79 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/kargo`;
+const title = 'Kargo & Teslimat Politikası | Saytad';
+const description = 'İstanbul içi aynı gün teslimat, yurt içi kargo, uluslararası gönderim, paketleme ve iade koşulları.';
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'tr' }),
+  breadcrumbSchema([
+    { name: 'Ana Sayfa', url: `${SITE.url}/` },
+    { name: 'Kargo Politikası', url },
+  ]),
+];
+---
+<Layout
+  lang="tr"
+  title={title}
+  description={description}
+  path="/kargo"
+  altPath="/en/shipping"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/static-pages.css" />
+
+  <section class="static-hero">
+    <p class="static-hero-eyebrow">Teslimat</p>
+    <h1 class="static-hero-title">Kargo <em>& Teslimat</em></h1>
+    <p class="static-hero-sub">İstanbul içi aynı gün, Türkiye geneli kargo, uluslararası gönderim ve paketleme detayları.</p>
+  </section>
+
+  <div class="static-wrap">
+    <h2>İstanbul İçi Aynı Gün Teslimat</h2>
+    <p>
+      Saat 14:00'a kadar verilen siparişler aynı gün Bahçeşehir veya Yeşilköy mutfağımızdan motosiklet kuryeyle teslim edilir. Daha geç saatlerde verilen siparişler ertesi gün taze yapılır ve gönderilir.
+    </p>
+    <ul>
+      <li>İstanbul Avrupa yakası: ücretsiz (₺3.000 ve üzeri siparişlerde)</li>
+      <li>İstanbul Anadolu yakası: ücretsiz (₺3.000 ve üzeri siparişlerde)</li>
+      <li>₺3.000 altı siparişlerde teslimat ücreti mesafeye göre belirlenir</li>
+    </ul>
+
+    <h2>Türkiye Geneli Kargo</h2>
+    <p>
+      Tüm Türkiye'ye anlaşmalı kargo firmaları üzerinden gönderim yapılmaktadır. Sipariş alındıktan sonra üretim ve sevkiyat 1 iş günü içinde tamamlanır. Standart teslimat süresi 1-3 iş günüdür.
+    </p>
+    <ul>
+      <li>Soğuk zincir gerektiren ürünler (soğuk baklava) için termal ambalaj kullanılır</li>
+      <li>Sıcak yaz aylarında soğutucu jel paketi eklenir</li>
+      <li>Cumartesi öğlen 12:00 sonrası ve pazar siparişleri pazartesi gönderilir</li>
+    </ul>
+
+    <h2>Uluslararası Gönderim</h2>
+    <p>
+      Yurt dışı gönderimler için lütfen <a href={`mailto:${SITE.email}`}>{SITE.email}</a> üzerinden bizimle iletişime geçin. Hedef ülkeye göre özel paketleme ve gümrük süreçleri farklılık gösterir.
+    </p>
+
+    <h2>Paketleme</h2>
+    <p>
+      Tüm baklavalar gıda kalitesinde özel kutularda, koruyucu astar ile paketlenir. Hediye siparişlerinde altın renkli karton kutu, kişisel kart ve ipek bant tercih edilebilir. Kurumsal siparişlerde marka logolu paketleme mümkündür.
+    </p>
+
+    <h2>İade & Değişim</h2>
+    <p>
+      Doğal yapıları gereği taze gıda ürünleri için iade kabul edilmemektedir. Ürünün hasarlı veya hatalı ulaşması durumunda, teslimat sonrası 24 saat içinde fotoğraflı bildirimde bulunmanız halinde değişim veya tam iade sağlanır.
+    </p>
+
+    <h2>İletişim</h2>
+    <p>
+      Sipariş takibi veya teslimat soruları için: {SITE.phoneDisplay} · <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+    </p>
+
+    <p class="static-meta">Son güncelleme: 10 Mayıs 2026</p>
+  </div>
+</Layout>

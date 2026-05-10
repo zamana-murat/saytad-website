@@ -1,0 +1,258 @@
+---
+import type { Product } from '@data/products';
+import { PRODUCT_CONTENT, type ProductContent } from '@data/productContent';
+import { ROUTES, type Lang } from '@data/site';
+
+interface Props {
+  product: Product;
+  lang: Lang;
+}
+
+const FALLBACK_CONTENT: ProductContent = {
+  heroTag: { tr: '', en: '' },
+  heroSubItalic: { tr: '', en: '' },
+  heroSub: { tr: '', en: '' },
+  longDesc: { tr: '', en: '' },
+  badges: { tr: [], en: [] },
+  meta: [],
+  ingredients: [],
+  ingredientsNote: { tr: '', en: '' },
+  allergensContains: { tr: [], en: [] },
+  allergensFree: { tr: [], en: [] },
+  allergensCrossNote: { tr: '', en: '' },
+  featuresEyebrow: { tr: '', en: '' },
+  featuresTitle: { tr: '', en: '' },
+  featuresTitleEm: { tr: '', en: '' },
+  features: [],
+  storyEyebrow: { tr: '', en: '' },
+  storyTitle: { tr: '', en: '' },
+  storyTitleEm: { tr: '', en: '' },
+  story: { tr: [], en: [] },
+  storage: [],
+  ctaEyebrow: { tr: 'Bugün Sipariş Ver', en: 'Order Today' },
+  ctaTitle: { tr: 'Denemeye', en: 'Ready to' },
+  ctaTitleEm: { tr: 'Hazır mısınız?', en: 'Experience It?' },
+  ctaSub: {
+    tr: 'İstanbul içi aynı gün teslimat. Yurt genelinde kargo mevcut.\nKurumsal ve toplu siparişler için bizimle iletişime geçin.',
+    en: 'Same-day delivery in Istanbul. Nationwide shipping available.\nContact us for corporate and bulk orders.',
+  },
+};
+
+const { product: p, lang } = Astro.props;
+const c: ProductContent = PRODUCT_CONTENT[p.slugEN] ?? FALLBACK_CONTENT;
+const r = ROUTES[lang];
+
+const isTR = lang === 'tr';
+const pick = <T,>(field: { tr: T; en: T }): T => (isTR ? field.tr : field.en);
+const pickArr = <T,>(field: { tr: T[]; en: T[] }): T[] => (isTR ? field.tr : field.en);
+
+const name = isTR ? p.nameTR : p.nameEN;
+const altName = isTR ? p.nameEN : p.nameTR;
+const desc = isTR ? p.descTR : p.descEN;
+const price = isTR ? p.priceTR : p.priceEN;
+const priceAmount = price.split('/')[0].trim(); // "₺1.800"
+const priceUnit = `/ ${(price.split('/')[1] ?? 'kg').trim()}`;
+
+const heroBg = p.image || '/images/FistikliBaklavaMainpage.webp';
+
+const homeLabel = isTR ? 'Ana Sayfa' : 'Home';
+const productsLabel = isTR ? 'Ürünler' : 'Products';
+const signatureLabel = isTR ? 'Saytad İmzası' : 'Saytad Signature';
+const ingredientsHeader = isTR ? 'İçindekiler' : 'Ingredients';
+const ingredientsHeaderEm = isTR ? '& Alerjen Bilgisi' : '& Allergen Information';
+const transparencyLabel = isTR ? 'Tam Şeffaflık' : 'Full Transparency';
+const fullListLabel = isTR ? 'Tam İçerik Listesi' : 'Full Ingredient List';
+const allergenInfoLabel = isTR ? 'Alerjen Bilgisi' : 'Allergen Information';
+const containsLabel = isTR ? 'İçerir' : 'Contains';
+const freeOfLabel = isTR ? 'İçermez' : 'Free of';
+const orderLabel = isTR ? 'Sipariş Ver' : 'Place an Order';
+const corporateLabel = isTR ? 'Kurumsal & Toplu Sipariş' : 'Corporate & Bulk';
+---
+<section class="product-hero">
+  <div class="product-hero-bg" style={`background-image: url('${heroBg}');`}></div>
+  <div class="product-hero-overlay"></div>
+  <div class="product-hero-content">
+    <div class="product-breadcrumb">
+      <a href={r.home}>{homeLabel}</a>
+      <span>/</span>
+      <a href={r.products}>{productsLabel}</a>
+      <span>/</span>
+      <span>{name}</span>
+    </div>
+    {pick(c.heroTag) && <div class="product-tag">{pick(c.heroTag)}</div>}
+    <h1 class="product-hero-title">
+      {name}
+      {pick(c.heroSubItalic) && <em>{pick(c.heroSubItalic)}</em>}
+    </h1>
+    {pick(c.heroSub) && (
+      <p class="product-hero-sub" set:html={pick(c.heroSub).replace(/\n/g, '<br>')}></p>
+    )}
+  </div>
+</section>
+
+<section class="product-main">
+  <div class="product-main-inner">
+    <div class="product-gallery reveal">
+      <div class="product-gallery-main">
+        {p.image && (
+          <img
+            src={p.image}
+            alt={`Saytad ${name}`}
+            loading="eager"
+            fetchpriority="high"
+            width="1200"
+            height="900"
+          />
+        )}
+      </div>
+    </div>
+
+    <div class="product-info reveal">
+      <p class="section-label">{signatureLabel}</p>
+      <h2 class="product-info-name">
+        {name}
+        <em>{altName}</em>
+      </h2>
+      <div class="product-price">
+        <span class="product-price-amount">{priceAmount}</span>
+        <span class="product-price-unit">{priceUnit}</span>
+      </div>
+      <p class="product-short-desc">{pick(c.longDesc) || desc}</p>
+
+      {pickArr(c.badges).length > 0 && (
+        <div class="product-badges">
+          {pickArr(c.badges).map((b) => (
+            <span class="product-badge">{b}</span>
+          ))}
+        </div>
+      )}
+
+      {c.meta.length > 0 && (
+        <div class="product-meta-list">
+          {c.meta.map((m) => (
+            <div class="product-meta-row">
+              <span class="product-meta-key">{pick(m.key)}</span>
+              <span class="product-meta-val">{pick(m.val)}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+{(c.ingredients.length > 0 || pickArr(c.allergensContains).length > 0) && (
+  <section class="product-ingredients">
+    <div class="product-ingredients-inner">
+      <div class="ingredients-header reveal">
+        <p class="section-label" style="color:var(--gold); justify-content:center;">{transparencyLabel}</p>
+        <h2 class="ingredients-header-title">{ingredientsHeader} <em>{ingredientsHeaderEm}</em></h2>
+      </div>
+
+      <div class="ingredients-grid reveal">
+        {c.ingredients.length > 0 && (
+          <div class="ingredients-block">
+            <p class="ingredients-block-title">{fullListLabel}</p>
+            <ul class="ingredients-list">
+              {c.ingredients.map((ing) => (
+                <li>
+                  <strong>{pick(ing.name)}</strong>
+                  <span>{pick(ing.detail)}</span>
+                </li>
+              ))}
+            </ul>
+            {pick(c.ingredientsNote) && (
+              <div class="allergen-warning" style="margin-top:2rem;" set:html={pick(c.ingredientsNote)}></div>
+            )}
+          </div>
+        )}
+
+        {(pickArr(c.allergensContains).length > 0 || pickArr(c.allergensFree).length > 0) && (
+          <div class="ingredients-block">
+            <p class="ingredients-block-title">{allergenInfoLabel}</p>
+            {pickArr(c.allergensContains).length > 0 && (
+              <>
+                <p style="font-size:0.8rem; color:var(--text-light); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:1rem;">{containsLabel}</p>
+                <div class="allergens-tags">
+                  {pickArr(c.allergensContains).map((a) => (
+                    <span class="allergen-tag allergen-tag--contains">{a}</span>
+                  ))}
+                </div>
+              </>
+            )}
+            {pickArr(c.allergensFree).length > 0 && (
+              <>
+                <p style="font-size:0.8rem; color:var(--text-light); letter-spacing:0.05em; text-transform:uppercase; margin:1.2rem 0 1rem;">{freeOfLabel}</p>
+                <div class="allergens-tags">
+                  {pickArr(c.allergensFree).map((a) => (
+                    <span class="allergen-tag allergen-tag--free">{a}</span>
+                  ))}
+                </div>
+              </>
+            )}
+            {pick(c.allergensCrossNote) && (
+              <div class="allergen-warning" set:html={pick(c.allergensCrossNote)}></div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+)}
+
+{c.features.length > 0 && (
+  <section class="product-features">
+    <div class="product-features-inner">
+      <p class="section-label" style="justify-content:center; color:var(--gold);">{pick(c.featuresEyebrow)}</p>
+      <h2 class="product-features-title">{pick(c.featuresTitle)} <em>{pick(c.featuresTitleEm)}</em></h2>
+      <div class="features-grid">
+        {c.features.map((f) => (
+          <div class="feature-card reveal">
+            <span class="feature-icon">{f.icon}</span>
+            <h3 class="feature-title">{pick(f.title)}</h3>
+            <p class="feature-desc">{pick(f.desc)}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+{pickArr(c.story).length > 0 && (
+  <section class="product-story">
+    <div class="product-story-inner">
+      <p class="section-label" style="color:var(--gold); justify-content:center;">{pick(c.storyEyebrow)}</p>
+      <h2 class="product-story-title">{pick(c.storyTitle)} <em>{pick(c.storyTitleEm)}</em></h2>
+      {pickArr(c.story).map((para) => (
+        <p class="product-story-text">{para}</p>
+      ))}
+    </div>
+  </section>
+)}
+
+{c.storage.length > 0 && (
+  <section class="product-storage">
+    <div class="product-storage-inner">
+      <div class="storage-grid reveal">
+        {c.storage.map((s) => (
+          <div class="storage-card">
+            <span class="storage-icon">{s.icon}</span>
+            <p class="storage-title">{pick(s.title)}</p>
+            <p class="storage-val">{pick(s.val)}</p>
+            <p class="storage-note">{pick(s.note)}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<section class="product-order-cta">
+  <div class="product-order-cta-eyebrow">{pick(c.ctaEyebrow)}</div>
+  <h2 class="product-order-cta-title">{pick(c.ctaTitle)} <em>{pick(c.ctaTitleEm)}</em></h2>
+  <p class="product-order-cta-sub" set:html={pick(c.ctaSub).replace(/\n/g, '<br>')}></p>
+  <div class="product-order-cta-actions">
+    <a href={r.contact} class="btn-gold">{orderLabel}</a>
+    <a href={r.contact} class="btn-outline">{corporateLabel}</a>
+  </div>
+</section>

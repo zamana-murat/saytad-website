@@ -1,0 +1,38 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ContactForm from '@components/ContactForm.astro';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/iletisim`;
+const title = 'İletişim | Saytad';
+const description = "Sipariş, kurumsal hediye, etkinlik ve uluslararası sevkiyat için bize ulaşın. Bahçeşehir ve Yeşilköy şubelerimizden İstanbul içi aynı gün teslimat.";
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'tr' }),
+  breadcrumbSchema([
+    { name: 'Ana Sayfa', url: `${SITE.url}/` },
+    { name: 'İletişim', url },
+  ]),
+];
+---
+<Layout
+  lang="tr"
+  title={title}
+  description={description}
+  path="/iletisim"
+  altPath="/en/contact"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/static-pages.css" />
+
+  <section class="static-hero">
+    <p class="static-hero-eyebrow">İletişim</p>
+    <h1 class="static-hero-title">Bize <em>Yazın</em></h1>
+    <p class="static-hero-sub">Siparişiniz, kurumsal hediye talebiniz veya bir sorunuz varsa formdan veya doğrudan {SITE.phoneDisplay} numaramızdan bize ulaşabilirsiniz.</p>
+  </section>
+
+  <ContactForm lang="tr" />
+</Layout>

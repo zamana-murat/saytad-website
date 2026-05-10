@@ -1,0 +1,51 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ProductDetail from '@components/ProductDetail.astro';
+import { PRODUCTS } from '@data/products';
+import { orgSchema, websiteSchema, productSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+export function getStaticPaths() {
+  return PRODUCTS.map((p) => ({
+    params: { slug: p.slugEN },
+    props: { product: p },
+  }));
+}
+
+const { product } = Astro.props;
+const url = `${SITE.url}/en/products/${product.slugEN}`;
+const altUrl = `/urunler/${product.slugTR}`;
+const title = `${product.nameEN} | Saytad`;
+const description = product.descEN;
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  productSchema({
+    name: product.nameEN,
+    description,
+    image: `${SITE.url}${product.image || '/images/FistikliBaklavaMainpage.webp'}`,
+    category: 'Turkish Sweets / Baklava',
+    inLanguage: 'en',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: `${SITE.url}/en` },
+    { name: 'Products', url: `${SITE.url}/en/products` },
+    { name: product.nameEN, url },
+  ]),
+];
+---
+<Layout
+  lang="en"
+  title={title}
+  description={description}
+  path={`/en/products/${product.slugEN}`}
+  altPath={altUrl}
+  ogImage={product.image || undefined}
+  ogImageAlt={`Saytad ${product.nameEN}`}
+  ogType="article"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/products.css" />
+  <ProductDetail product={product} lang="en" />
+</Layout>

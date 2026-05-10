@@ -1,0 +1,41 @@
+---
+import { ROUTES, type Lang } from '@data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const r = ROUTES[lang];
+
+const t = lang === 'tr'
+  ? {
+      eyebrow: 'Öne Çıkan Ürün',
+      title: 'Özel Fıstıklı',
+      titleEm: 'Şöbiyet Baklava',
+      body: 'İmza şöbiyetimiz — taze kaymak ve en kaliteli Gaziantep fıstığıyla dolu katlanmış üçgen hamur. Saytad mutfağının tacı, her sabah özenle el yapımı hazırlanır.',
+      cta: 'Bu Ürünü Sipariş Et',
+      alt: 'Özel Fıstıklı Şöbiyet Baklava',
+      slug: 'ozel-sobiyet',
+    }
+  : {
+      eyebrow: 'Featured Product',
+      title: 'Special Pistachio',
+      titleEm: 'Şöbiyet Baklava',
+      body: 'Our signature şöbiyet — folded triangle pastry generously filled with fresh cream and the finest Gaziantep pistachios. The crown jewel of the Saytad kitchen, hand-crafted every morning.',
+      cta: 'Order This Piece',
+      alt: 'Special Sobiyet Baklava',
+      slug: 'special-sobiyet',
+    };
+---
+<div class="featured" id="special">
+  <div class="featured-img">
+    <img src="/images/Fistikli-ozel-sobiyet-baklava-2.webp" alt={t.alt} loading="lazy" width="1200" height="900" />
+  </div>
+  <div class="featured-content reveal">
+    <p class="section-label" style="color:var(--gold);">{t.eyebrow}</p>
+    <h2 class="section-title section-title--light">{t.title}<br /><em>{t.titleEm}</em></h2>
+    <p class="featured-text">{t.body}</p>
+    <a href={r.product(t.slug)} class="btn-gold" style="align-self:flex-start;">{t.cta}</a>
+  </div>
+</div>

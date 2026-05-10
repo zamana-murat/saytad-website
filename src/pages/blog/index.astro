@@ -1,0 +1,31 @@
+---
+import Layout from '@layouts/Layout.astro';
+import BlogList from '@components/BlogList.astro';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/blog`;
+const title = 'Saytad Dergisi — Baklava, Kadayıf ve Türk Pastacılığı';
+const description = 'Zanaat, gelenek ve Türk pastacılığının tatlı sanatı. Baklava, kadayıf, soğuk baklava üzerine derinlemesine yazılar.';
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'tr' }),
+  breadcrumbSchema([
+    { name: 'Ana Sayfa', url: `${SITE.url}/` },
+    { name: 'Dergi', url },
+  ]),
+];
+---
+<Layout
+  lang="tr"
+  title={title}
+  description={description}
+  path="/blog"
+  altPath="/en/blog"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/blog.css" />
+  <BlogList lang="tr" />
+</Layout>

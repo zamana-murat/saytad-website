@@ -1,0 +1,26 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { SITE } from '@data/site';
+
+const title = '404 — Sayfa Bulunamadı | Page Not Found | Saytad';
+const description = 'Aradığınız sayfa bulunamadı. The page you are looking for could not be found.';
+---
+<Layout
+  lang="tr"
+  title={title}
+  description={description}
+  path="/404"
+  altPath="/404"
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/static-pages.css" />
+
+  <section class="static-hero" style="padding: 6rem 2rem 5rem;">
+    <p class="static-hero-eyebrow">404</p>
+    <h1 class="static-hero-title">Bu Sayfa <em>Bulunamadı</em></h1>
+    <p class="static-hero-sub">Page not found. Aradığınız sayfa taşınmış veya silinmiş olabilir.<br />The page may have moved or been removed.</p>
+    <div class="notfound-actions">
+      <a href="/" class="btn-gold">Ana Sayfa · Home</a>
+      <a href="/urunler" class="btn-outline">Ürünlerimiz · Products</a>
+    </div>
+  </section>
+</Layout>

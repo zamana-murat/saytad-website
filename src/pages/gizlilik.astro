@@ -1,0 +1,91 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/gizlilik`;
+const title = 'Gizlilik Politikası | Saytad';
+const description = 'KVKK ve GDPR kapsamında kişisel verilerin işlenmesi, saklanması ve haklarınız hakkında bilgi.';
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'tr' }),
+  breadcrumbSchema([
+    { name: 'Ana Sayfa', url: `${SITE.url}/` },
+    { name: 'Gizlilik Politikası', url },
+  ]),
+];
+---
+<Layout
+  lang="tr"
+  title={title}
+  description={description}
+  path="/gizlilik"
+  altPath="/en/privacy"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/static-pages.css" />
+
+  <section class="static-hero">
+    <p class="static-hero-eyebrow">Yasal</p>
+    <h1 class="static-hero-title">Gizlilik <em>Politikası</em></h1>
+    <p class="static-hero-sub">Kişisel verilerinizi nasıl işlediğimiz, sakladığımız ve haklarınız.</p>
+  </section>
+
+  <div class="static-wrap">
+    <h2>Veri Sorumlusu</h2>
+    <p>
+      Saytad Baklava (bundan sonra "Saytad" veya "biz" olarak anılacaktır) olarak, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve Avrupa Birliği Genel Veri Koruma Tüzüğü (GDPR) kapsamında veri sorumlusuyuz.
+    </p>
+    <p>
+      Adres: Saytad Bahçeşehir · Saytad Yeşilköy, İstanbul<br />
+      E-posta: <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
+      Telefon: {SITE.phoneDisplay}
+    </p>
+
+    <h2>Topladığımız Veriler</h2>
+    <ul>
+      <li><strong>İletişim formu:</strong> ad, soyad, e-posta adresi, telefon (opsiyonel), mesaj içeriği.</li>
+      <li><strong>Sipariş süreçleri:</strong> teslimat adresi, fatura bilgileri (kurumsal sipariş için).</li>
+      <li><strong>Otomatik:</strong> tarayıcı türü, anonim ziyaret istatistikleri (Cloudflare Web Analytics, çerezsiz ve kişisel veri içermez).</li>
+    </ul>
+
+    <h2>Verileri Kullanma Amacı</h2>
+    <ul>
+      <li>İletişim taleplerinize yanıt vermek</li>
+      <li>Sipariş hazırlığı ve teslimatı</li>
+      <li>Yasal yükümlülükleri (faturalandırma, vergi) yerine getirmek</li>
+      <li>Hizmet kalitesini iyileştirmek (anonim, toplu istatistik)</li>
+    </ul>
+
+    <h2>Veri Saklama</h2>
+    <p>
+      İletişim formu kayıtları talep çözüldükten sonra en fazla 12 ay saklanır. Sipariş ve fatura kayıtları yasal saklama yükümlülüğü gereği 10 yıl tutulur.
+    </p>
+
+    <h2>Veri Paylaşımı</h2>
+    <p>
+      Kişisel verilerinizi, yasal zorunluluk dışında üçüncü taraflarla satmıyor veya paylaşmıyoruz. Sipariş teslimi için kargo şirketleri ile yalnızca gerekli teslimat bilgileri paylaşılır. Form gönderimi için Resend (AB veri merkezi) altyapısı kullanılır.
+    </p>
+
+    <h2>Haklarınız (KVKK Madde 11)</h2>
+    <ul>
+      <li>İşlenen kişisel verileriniz hakkında bilgi alma</li>
+      <li>İşlenmiş ise bilgi talep etme</li>
+      <li>Düzeltme, silme veya yok etme talebinde bulunma</li>
+      <li>Aktarıldığı üçüncü kişileri öğrenme</li>
+      <li>İtiraz etme</li>
+    </ul>
+    <p>
+      Bu haklarınızı kullanmak için <a href={`mailto:${SITE.email}`}>{SITE.email}</a> adresine yazılı talep gönderebilirsiniz. 30 gün içinde yanıtlarız.
+    </p>
+
+    <h2>Çerezler</h2>
+    <p>
+      Saytad.com cookie kullanmaz. Trafik analizi için Cloudflare Web Analytics kullanırız; bu hizmet çerezsiz çalışır ve kişisel veri toplamaz.
+    </p>
+
+    <p class="static-meta">Son güncelleme: 10 Mayıs 2026</p>
+  </div>
+</Layout>

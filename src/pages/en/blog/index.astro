@@ -1,0 +1,31 @@
+---
+import Layout from '@layouts/Layout.astro';
+import BlogList from '@components/BlogList.astro';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/en/blog`;
+const title = 'Saytad Magazine — Baklava, Kadayıf & Turkish Pastry';
+const description = 'Craft, tradition and the sweet art of Turkish pastry. In-depth posts on baklava, kadayıf and cold baklava.';
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'en' }),
+  breadcrumbSchema([
+    { name: 'Home', url: `${SITE.url}/en` },
+    { name: 'Magazine', url },
+  ]),
+];
+---
+<Layout
+  lang="en"
+  title={title}
+  description={description}
+  path="/en/blog"
+  altPath="/blog"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/blog.css" />
+  <BlogList lang="en" />
+</Layout>

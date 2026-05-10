@@ -1,0 +1,49 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { FAQS } from '@data/faq';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema, faqPageSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/en/faq`;
+const title = 'Frequently Asked Questions | Saytad';
+const description = 'Common questions about Saytad baklava: freshness, shipping, storage, corporate orders, vegan options and more.';
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'en' }),
+  breadcrumbSchema([
+    { name: 'Home', url: `${SITE.url}/en` },
+    { name: 'FAQ', url },
+  ]),
+  faqPageSchema(FAQS.map((f) => ({ q: f.q.en, a: f.a.en }))),
+];
+---
+<Layout
+  lang="en"
+  title={title}
+  description={description}
+  path="/en/faq"
+  altPath="/sss"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/static-pages.css" />
+
+  <section class="static-hero">
+    <p class="static-hero-eyebrow">Frequently Asked</p>
+    <h1 class="static-hero-title">Everything You <em>Want to Know</em></h1>
+    <p class="static-hero-sub">Answers about ordering, delivery, freshness and special requests — all in one place.</p>
+  </section>
+
+  <div class="static-wrap">
+    <div class="faq-list">
+      {FAQS.map((f) => (
+        <details class="faq-item">
+          <summary class="faq-q">{f.q.en}</summary>
+          <div class="faq-a">{f.a.en}</div>
+        </details>
+      ))}
+    </div>
+    <p class="static-meta">Don't see your question? <a href="/en/contact">Get in touch</a> — we reply within 24 hours.</p>
+  </div>
+</Layout>

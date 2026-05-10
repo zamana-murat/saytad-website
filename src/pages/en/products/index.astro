@@ -1,0 +1,31 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ProductsListing from '@components/ProductsListing.astro';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/en/products`;
+const title = 'Our Products — Baklava, Kadayıf, Cold Baklava & Vegan | Saytad';
+const description = "Saytad's full product collection: 26 varieties of baklava, kadayıf, cold baklava and vegan sweets. Handcrafted daily in Istanbul.";
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'en' }),
+  breadcrumbSchema([
+    { name: 'Home', url: `${SITE.url}/en` },
+    { name: 'Our Products', url },
+  ]),
+];
+---
+<Layout
+  lang="en"
+  title={title}
+  description={description}
+  path="/en/products"
+  altPath="/urunler"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/products-list.css" />
+  <ProductsListing lang="en" />
+</Layout>

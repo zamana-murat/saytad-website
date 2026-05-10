@@ -1,0 +1,38 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ContactForm from '@components/ContactForm.astro';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/en/contact`;
+const title = 'Contact | Saytad';
+const description = 'Reach us for orders, corporate gifts, events or international shipping. Same-day delivery in Istanbul from our Bahçeşehir and Yeşilköy locations.';
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'en' }),
+  breadcrumbSchema([
+    { name: 'Home', url: `${SITE.url}/en` },
+    { name: 'Contact', url },
+  ]),
+];
+---
+<Layout
+  lang="en"
+  title={title}
+  description={description}
+  path="/en/contact"
+  altPath="/iletisim"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/static-pages.css" />
+
+  <section class="static-hero">
+    <p class="static-hero-eyebrow">Get in Touch</p>
+    <h1 class="static-hero-title">Write to <em>Us</em></h1>
+    <p class="static-hero-sub">For orders, corporate gift requests or any question, use the form below or call us directly at {SITE.phoneDisplay}.</p>
+  </section>
+
+  <ContactForm lang="en" />
+</Layout>

@@ -1,0 +1,60 @@
+---
+import type { Lang } from '@data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const t = lang === 'tr'
+  ? {
+      eyebrow: 'Neler Sunuyoruz',
+      title: 'Tatlı Geleneğin',
+      titleEm: 'Dünyası',
+      view: 'Seçimi Gör →',
+      cards: [
+        { tag: 'Klasiğimiz', name: 'Geleneksel<br>Baklava', img: '/images/FistikliBaklavaMainpage.webp', alt: 'Geleneksel Baklava', tall: true, anchor: '#baklava' },
+        { tag: 'Mutlaka Deneyin', name: 'Kadayıf', img: '/images/Hasir_Kadayif.webp', alt: 'Kadayıf', anchor: '#kadayif' },
+        { tag: 'Yaz Favorisi', name: 'Soğuk Baklava', img: '/images/Soguk_Baklava_Main_Page.webp', alt: 'Soğuk Baklava', anchor: '#cold' },
+        { tag: 'Şefin Seçimi', name: 'Özel Lezzetler', img: '/images/Fistikli-Midye-Baklava.webp', alt: 'Özel Lezzetler', anchor: '#baklava' },
+        { tag: 'Bitkisel', name: 'Vegan Baklava', img: '/images/Cevizli-Vegan-Baklava.webp', alt: 'Vegan Baklava', anchor: '#vegan' },
+        { tag: 'Geleneksel Börek', name: 'Su Böreği', img: '/images/Peynirli_Su_Boregi.webp', alt: 'Su Böreği', anchor: '#menu' },
+        { tag: 'Yöresel', name: 'Yöresel Ürünler', img: '/images/katmer.webp', alt: 'Yöresel Ürünler', anchor: '#menu' },
+      ],
+    }
+  : {
+      eyebrow: 'What We Offer',
+      title: 'A World of',
+      titleEm: 'Sweet Tradition',
+      view: 'View Selection →',
+      cards: [
+        { tag: 'Our Classic', name: 'Traditional<br>Baklava', img: '/images/FistikliBaklavaMainpage.webp', alt: 'Traditional Baklava', tall: true, anchor: '#baklava' },
+        { tag: 'A Must-Try', name: 'Kadayıf', img: '/images/Hasir_Kadayif.webp', alt: 'Kadayif', anchor: '#kadayif' },
+        { tag: 'Summer Favourite', name: 'Cold Baklava', img: '/images/Soguk_Baklava_Main_Page.webp', alt: 'Cold Baklava', anchor: '#cold' },
+        { tag: "Chef's Pick", name: 'Special Flavours', img: '/images/Fistikli-Midye-Baklava.webp', alt: 'Special Flavours', anchor: '#baklava' },
+        { tag: 'Plant-Based', name: 'Vegan Baklava', img: '/images/Cevizli-Vegan-Baklava.webp', alt: 'Vegan Baklava', anchor: '#vegan' },
+        { tag: 'Traditional Pastry', name: 'Su Böreği', img: '/images/Peynirli_Su_Boregi.webp', alt: 'Su Boregi', anchor: '#menu' },
+        { tag: 'Regional', name: 'Local Products', img: '/images/katmer.webp', alt: 'Local Products', anchor: '#menu' },
+      ],
+    };
+---
+<section class="categories" id="categories">
+  <div class="categories-header reveal">
+    <p class="section-label">{t.eyebrow}</p>
+    <h2 class="section-title">{t.title} <em>{t.titleEm}</em></h2>
+  </div>
+
+  <div class="cat-grid">
+    {t.cards.map((c) => (
+      <div class={`cat-card${c.tall ? ' cat-card--tall' : ''} reveal`}>
+        <img src={c.img} alt={c.alt} loading="lazy" width="800" height="800" />
+        <div class="cat-label">
+          <p class="cat-label-tag">{c.tag}</p>
+          <h3 class="cat-label-name" set:html={c.name}></h3>
+          <a href={c.anchor} class="cat-link">{t.view}</a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

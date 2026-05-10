@@ -1,0 +1,90 @@
+---
+import { ROUTES, STRINGS, type Lang } from '@data/site';
+
+interface Props {
+  lang: Lang;
+  /** Pathname of current page (used to mark blog tab active). */
+  pathname?: string;
+}
+
+const { lang, pathname = '' } = Astro.props;
+const r = ROUTES[lang];
+const s = STRINGS[lang];
+const altLang: Lang = lang === 'tr' ? 'en' : 'tr';
+
+// Mark blog active if currently in blog section
+const isBlog = pathname.includes('/blog');
+---
+<div class="topbar" set:html={s.topbar}></div>
+
+<nav>
+  <div class="nav-left">
+    <a href={r.home}>{s.nav.home}</a>
+    <a href={r.products}>{s.nav.products}</a>
+    <a href={r.blog} class={isBlog ? 'active' : undefined}>{s.nav.blog}</a>
+    <a href={r.story}>{s.nav.story}</a>
+  </div>
+  <a href={r.home} class="nav-logo">
+    <span class="nav-logo-top">Saytad</span>
+    <span class="nav-logo-sub">Baklava</span>
+  </a>
+  <div class="nav-right">
+    <a href={r.contact}>{s.nav.contact}</a>
+    <div class="lang-switch">
+      <a href={ROUTES.en.home} class={`lang-btn${lang === 'en' ? ' active' : ''}`} title="English">🇺🇸 EN</a>
+      <a href={ROUTES.tr.home} class={`lang-btn${lang === 'tr' ? ' active' : ''}`} title="Türkçe">🇹🇷 TR</a>
+    </div>
+  </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label={s.menuLabel} aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-brand">
+      <a href={r.home} class="mobile-menu-logo">
+        <span class="mobile-logo-name">Saytad</span>
+        <span class="mobile-logo-sub">{s.mobileLogoSub}</span>
+      </a>
+      <div class="mobile-menu-rule"></div>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href={r.home}>{s.nav.home}</a>
+      <a href={r.products}>{s.nav.products}</a>
+      <a href={r.blog}>{s.nav.blog}</a>
+      <a href={r.story}>{s.nav.story}</a>
+      <a href={r.contact}>{s.nav.contact}</a>
+    </nav>
+    <div class="mobile-menu-foot">
+      <div class="mobile-lang">
+        <a href={ROUTES.en.home} class={`lang-btn${lang === 'en' ? ' active' : ''}`} title="English">🇺🇸 EN</a>
+        <a href={ROUTES.tr.home} class={`lang-btn${lang === 'tr' ? ' active' : ''}`} title="Türkçe">🇹🇷 TR</a>
+      </div>
+      <p class="mobile-menu-tag">{s.mobileTag}</p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function () {
+      const isOpen = this.classList.toggle('open');
+      mobileMenu.classList.toggle('open', isOpen);
+      this.setAttribute('aria-expanded', String(isOpen));
+      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+</script>

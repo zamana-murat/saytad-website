@@ -1,0 +1,22 @@
+# robots.txt — saytad.com
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /*?utm_
+
+# AI crawlers (allowed — content is publicly meant to be discovered)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap
+Sitemap: https://www.saytad.com/sitemap.xml

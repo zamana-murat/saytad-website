@@ -1,0 +1,61 @@
+---
+import { SITE, ROUTES, STRINGS, type Lang } from '@data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const r = ROUTES[lang];
+const s = STRINGS[lang];
+const hours = lang === 'tr' ? SITE.hoursTR : SITE.hoursEN;
+const year = new Date().getFullYear();
+---
+<footer>
+  <div class="footer-top">
+    <div>
+      <p class="footer-brand-name">{SITE.brand}</p>
+      <p class="footer-brand-tag">{s.footer.tagline}</p>
+      <div class="footer-brand-desc">
+        <p>📍 {SITE.locations[0].name} &nbsp;·&nbsp; {SITE.locations[1].name}</p>
+        <p class="footer-phone">📞<span>{SITE.locations[0].area}: {SITE.phoneDisplay}<br />{SITE.locations[1].area}: {SITE.phoneDisplay}</span></p>
+        <p>✉️ {SITE.email}</p>
+        <p>🕐 {hours}</p>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>{s.footer.products}</h4>
+      <ul>
+        <li><a href={`${r.products}#baklava`}>{s.productCats.traditional}</a></li>
+        <li><a href={`${r.products}#kadayif`}>{s.productCats.kadayif}</a></li>
+        <li><a href={`${r.products}#cold`}>{s.productCats.cold}</a></li>
+        <li><a href={`${r.products}#vegan`}>{s.productCats.vegan}</a></li>
+        <li><a href={r.products}>{s.productCats.boregi}</a></li>
+        <li><a href={r.products}>{s.productCats.gifts}</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>{s.footer.company}</h4>
+      <ul>
+        <li><a href={r.story}>{s.companyLinks.story}</a></li>
+        <li><a href={r.blog}>{s.companyLinks.blog}</a></li>
+        <li><a href={r.contact}>{s.companyLinks.contact}</a></li>
+        <li><a href={r.contact}>{s.companyLinks.corporate}</a></li>
+        <li><a href={r.shipping}>{s.companyLinks.shipping}</a></li>
+        <li><a href={r.privacy}>{s.companyLinks.privacy}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© {year} {SITE.brand}. {s.footer.rights}</p>
+    <div class="footer-socials">
+      <a href={SITE.instagram}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        </svg>@saytadbaklava
+      </a>
+    </div>
+  </div>
+</footer>

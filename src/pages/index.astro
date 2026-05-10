@@ -1,0 +1,62 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ProductMenu from '@components/ProductMenu.astro';
+import Marquee from '@components/Marquee.astro';
+import Featured from '@components/Featured.astro';
+import Categories from '@components/Categories.astro';
+import GiftBanner from '@components/GiftBanner.astro';
+import About from '@components/About.astro';
+import ContactForm from '@components/ContactForm.astro';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/`;
+const title = 'Fıstıklı Baklava – Gaziantep Usulü El Yapımı | Saytad';
+const description =
+  "Saytad baklava fiyatları: fıstıklı, cevizli, soğuk ve vegan baklava. Sade yağ ve Gaziantep fıstığıyla el yapımı. İstanbul'da aynı gün teslimat.";
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'tr', dateModified: '2026-05-10' }),
+  breadcrumbSchema([{ name: 'Ana Sayfa', url }]),
+];
+---
+<Layout
+  lang="tr"
+  title={title}
+  description={description}
+  path="/"
+  altPath="/en"
+  schema={schema}
+  dateModified="2026-05-10"
+>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Gaziantep Geleneğiyle El Yapımı</div>
+      <h1>Baklavanın Sanatını <em>Tadın</em></h1>
+      <p class="hero-desc">
+        Kat kat, özenle açılmış, baklavamız altın rengi, şerbetli her dilimde yüzyıllık geleneği taşır.
+        Sade yağ, en kaliteli Gaziantep fıstığı ve bol sevgiyle yapılır.
+      </p>
+      <div class="hero-actions">
+        <a href="#categories" class="btn-gold">Tatlılarımızı Keşfedin</a>
+        <a href="#about" class="btn-outline">Hikayemiz</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Kaydır</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <ProductMenu lang="tr" />
+  <Marquee lang="tr" />
+  <Featured lang="tr" />
+  <Categories lang="tr" />
+  <GiftBanner lang="tr" />
+  <About lang="tr" />
+  <ContactForm lang="tr" />
+</Layout>

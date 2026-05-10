@@ -1,0 +1,49 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { FAQS } from '@data/faq';
+import { orgSchema, websiteSchema, webPageSchema, breadcrumbSchema, faqPageSchema } from '@data/schema';
+import { SITE } from '@data/site';
+
+const url = `${SITE.url}/sss`;
+const title = 'Sıkça Sorulan Sorular | Saytad';
+const description = 'Saytad baklava hakkında en sık sorulan sorular: tazelik, kargo, saklama, kurumsal sipariş, vegan seçenekler ve daha fazlası.';
+
+const schema = [
+  orgSchema,
+  websiteSchema,
+  webPageSchema({ url, name: title, description, inLanguage: 'tr' }),
+  breadcrumbSchema([
+    { name: 'Ana Sayfa', url: `${SITE.url}/` },
+    { name: 'SSS', url },
+  ]),
+  faqPageSchema(FAQS.map((f) => ({ q: f.q.tr, a: f.a.tr }))),
+];
+---
+<Layout
+  lang="tr"
+  title={title}
+  description={description}
+  path="/sss"
+  altPath="/en/faq"
+  schema={schema}
+>
+  <link slot="extra-css" rel="stylesheet" href="/assets/css/static-pages.css" />
+
+  <section class="static-hero">
+    <p class="static-hero-eyebrow">Sıkça Sorulanlar</p>
+    <h1 class="static-hero-title">Aklınıza Takılan <em>Her Şey</em></h1>
+    <p class="static-hero-sub">Sipariş, teslimat, tazelik ve özel istekler hakkında — bilmek istediklerinizin yanıtları burada.</p>
+  </section>
+
+  <div class="static-wrap">
+    <div class="faq-list">
+      {FAQS.map((f) => (
+        <details class="faq-item">
+          <summary class="faq-q">{f.q.tr}</summary>
+          <div class="faq-a">{f.a.tr}</div>
+        </details>
+      ))}
+    </div>
+    <p class="static-meta">Sorunuzu burada bulamadınız mı? <a href="/iletisim">Bize doğrudan yazın</a> — 24 saat içinde döneriz.</p>
+  </div>
+</Layout>

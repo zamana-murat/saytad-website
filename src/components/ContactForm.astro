@@ -1,0 +1,127 @@
+---
+import { SITE, type Lang } from '@data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const t = lang === 'tr'
+  ? {
+      eyebrow: 'Bize Ulaşın',
+      title: 'Sipariş Ver ya da',
+      titleEm: 'Merhaba De',
+      addr: 'Saytad Bahçeşehir<br>Saytad Yeşilköy',
+      phone: 'Bahçeşehir: +90 539 513 8003<br>Yeşilköy: +90 539 513 8003',
+      hours: 'Pzt – Paz: 09:00 – 22:00',
+      ship: 'İstanbul içi aynı gün teslimat<br>₺3.000 üzeri siparişlerde ücretsiz kargo',
+      first: 'Ad', last: 'Soyad',
+      firstPh: 'Ayşe', lastPh: 'Yılmaz',
+      email: 'E-posta', emailPh: 'eposta@adresiniz.com',
+      phoneL: 'Telefon (isteğe bağlı)', phonePh: '+90 5XX XXX XX XX',
+      interest: 'İlgilendiğim konu',
+      categories: ['Kategori seçin', 'Ürün Siparişi', 'Hediye Koleksiyonları', 'Kurumsal / Toplu Sipariş', 'Uluslararası Kargo', 'Diğer'],
+      msg: 'Mesaj', msgPh: 'Size nasıl yardımcı olabileceğimizi yazın…',
+      send: 'Mesaj Gönder',
+      sending: 'Gönderiliyor...',
+      sent: '✓ Gönderildi! En kısa sürede dönüş yapacağız.',
+      err: 'Gönderilemedi. Lütfen tekrar deneyin veya doğrudan info@saytad.com adresine e-posta gönderin.',
+    }
+  : {
+      eyebrow: 'Reach Us',
+      title: 'Order or',
+      titleEm: 'Just Say Hello',
+      addr: 'Saytad Bahçeşehir<br>Saytad Yeşilköy',
+      phone: 'Bahçeşehir: +90 539 513 8003<br>Yeşilköy: +90 539 513 8003',
+      hours: 'Mon – Sun: 09:00 – 22:00',
+      ship: 'Same-day delivery in Istanbul<br>₺3,000+ orders ship free',
+      first: 'First Name', last: 'Last Name',
+      firstPh: 'Ayşe', lastPh: 'Yılmaz',
+      email: 'Email', emailPh: 'your@email.com',
+      phoneL: 'Phone (optional)', phonePh: '+90 5XX XXX XX XX',
+      interest: "I'm interested in",
+      categories: ['Select a category', 'Product Order', 'Gift Collections', 'Corporate / Bulk Orders', 'International Shipping', 'Other'],
+      msg: 'Message', msgPh: 'Tell us how we can help…',
+      send: 'Send Message',
+      sending: 'Sending...',
+      sent: "✓ Sent! We'll be in touch.",
+      err: 'Could not send. Please try again or email info@saytad.com directly.',
+    };
+---
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info reveal">
+      <p class="section-label">{t.eyebrow}</p>
+      <h2 class="section-title section-title--light">{t.title} <em>{t.titleEm}</em></h2>
+      <div class="contact-details">
+        <div class="cdet"><span class="cdet-icon">📍</span><span set:html={t.addr}></span></div>
+        <div class="cdet"><span class="cdet-icon">📞</span><span set:html={t.phone}></span></div>
+        <div class="cdet"><span class="cdet-icon">✉️</span><span>{SITE.email}</span></div>
+        <div class="cdet"><span class="cdet-icon">🕐</span><span>{t.hours}</span></div>
+        <div class="cdet"><span class="cdet-icon">📦</span><span set:html={t.ship}></span></div>
+      </div>
+    </div>
+
+    <form class="contact-form" id="contactForm" data-lang={lang}>
+      <div class="form-row2">
+        <div class="fg"><label>{t.first}</label><input type="text" name="firstName" placeholder={t.firstPh} required /></div>
+        <div class="fg"><label>{t.last}</label><input type="text" name="lastName" placeholder={t.lastPh} required /></div>
+      </div>
+      <div class="fg"><label>{t.email}</label><input type="email" name="email" placeholder={t.emailPh} required /></div>
+      <div class="fg"><label>{t.phoneL}</label><input type="tel" name="phone" placeholder={t.phonePh} /></div>
+      <div class="fg">
+        <label>{t.interest}</label>
+        <select name="interest">
+          {t.categories.map((c, i) => (
+            <option value={i === 0 ? '' : c}>{c}</option>
+          ))}
+        </select>
+      </div>
+      <div class="fg"><label>{t.msg}</label><textarea name="message" placeholder={t.msgPh} required></textarea></div>
+      {/* Honeypot — hidden field bots fill in */}
+      <div style="position:absolute;left:-10000px;" aria-hidden="true">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+      <button type="submit" class="btn-gold" style="align-self:flex-start;" id="sendBtn" data-default={t.send} data-sending={t.sending} data-sent={t.sent} data-err={t.err}>{t.send}</button>
+    </form>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById('contactForm');
+    const btn = document.getElementById('sendBtn');
+    if (!form || !btn) return;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.lang = form.getAttribute('data-lang') || 'tr';
+      btn.textContent = btn.getAttribute('data-sending');
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error('http ' + res.status);
+        btn.textContent = btn.getAttribute('data-sent');
+        btn.style.background = '#3d8a5c';
+        btn.style.color = '#fff';
+        form.reset();
+      } catch (err) {
+        btn.textContent = btn.getAttribute('data-err');
+        btn.style.background = '#a14040';
+        btn.style.color = '#fff';
+      } finally {
+        setTimeout(() => {
+          btn.textContent = btn.getAttribute('data-default');
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.disabled = false;
+        }, 4500);
+      }
+    });
+  })();
+</script>
