@@ -49,7 +49,16 @@ const t = lang === 'tr'
     {t.cards.map((c) => (
       <div class={`cat-card${c.tall ? ' cat-card--tall' : ''} reveal`}>
         <picture>
-          <source srcset={c.img.replace(/\.webp$/, '.avif')} type="image/avif" />
+          <source
+            type="image/avif"
+            sizes="(max-width: 960px) 50vw, 25vw"
+            srcset={`${c.img.replace(/\.webp$/, '-600w.avif')} 600w, ${c.img.replace(/\.webp$/, '.avif')} 1600w`}
+          />
+          <source
+            type="image/webp"
+            sizes="(max-width: 960px) 50vw, 25vw"
+            srcset={`${c.img.replace(/\.webp$/, '-600w.webp')} 600w, ${c.img} 1600w`}
+          />
           <img src={c.img} alt={c.alt} loading="lazy" width="800" height="800" />
         </picture>
         <div class="cat-label">

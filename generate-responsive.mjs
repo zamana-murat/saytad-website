@@ -13,10 +13,17 @@ const ORIG = path.join(__dirname, 'images-original');
 const PLAN = [
   // [filename, widths to generate]
   ['Fistikli-ozel-sobiyet-baklava.webp', [768]],
-  ['FistikliBaklavaMainpage.webp', [768]],
+  ['FistikliBaklavaMainpage.webp', [600, 768]], // also a Categories card
   ['Fistikli-ozel-sobiyet-baklava-2.webp', [600, 1200]], // Featured component
   ['P1010992.webp', [600, 1200]], // About component
   ['Beyaz-Cikolatali-Soguk-Baklava.webp', [768, 1200]], // GiftBanner
+  // Categories cards
+  ['Hasir_Kadayif.webp', [600]],
+  ['Soguk_Baklava_Main_Page.webp', [600]],
+  ['Fistikli-Midye-Baklava.webp', [600]],
+  ['Cevizli-Vegan-Baklava.webp', [600]],
+  ['Peynirli_Su_Boregi.webp', [600]],
+  ['katmer.webp', [600]],
 ];
 
 let totalAvif = 0;
