@@ -22,6 +22,8 @@ interface Props {
   dateModified?: string;
   /** Absolute path of the LCP hero image to preload (e.g. "/images/foo.webp"). */
   preloadImage?: string;
+  /** If true, also preload a 768w mobile variant (foo-768w.webp + .avif must exist). */
+  preloadImageResponsive?: boolean;
 }
 
 const {
@@ -36,7 +38,12 @@ const {
   schema = [],
   dateModified,
   preloadImage,
+  preloadImageResponsive = false,
 } = Astro.props;
+
+const preloadImageAvif = preloadImage?.replace(/\.webp$/, '.avif');
+const preloadImageMobile = preloadImage?.replace(/(\.\w+)$/, '-768w$1');
+const preloadImageMobileAvif = preloadImageMobile?.replace(/\.webp$/, '.avif');
 
 const url = `${SITE.url}${path}`;
 const trUrl = lang === 'tr' ? url : `${SITE.url}${altPath}`;
@@ -85,8 +92,20 @@ const ogLocaleAlt = lang === 'tr' ? 'en_US' : 'tr_TR';
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
 
-    {preloadImage && <link rel="preload" as="image" href={preloadImage.replace(/\.webp$/, '.avif')} type="image/avif" fetchpriority="high" />}
-    {preloadImage && <link rel="preload" as="image" href={preloadImage} type="image/webp" fetchpriority="high" />}
+    {preloadImage && preloadImageResponsive && (
+      <>
+        <link rel="preload" as="image" media="(max-width: 768px)" href={preloadImageMobileAvif} type="image/avif" fetchpriority="high" />
+        <link rel="preload" as="image" media="(max-width: 768px)" href={preloadImageMobile} type="image/webp" fetchpriority="high" />
+        <link rel="preload" as="image" media="(min-width: 769px)" href={preloadImageAvif} type="image/avif" fetchpriority="high" />
+        <link rel="preload" as="image" media="(min-width: 769px)" href={preloadImage} type="image/webp" fetchpriority="high" />
+      </>
+    )}
+    {preloadImage && !preloadImageResponsive && (
+      <>
+        <link rel="preload" as="image" href={preloadImageAvif} type="image/avif" fetchpriority="high" />
+        <link rel="preload" as="image" href={preloadImage} type="image/webp" fetchpriority="high" />
+      </>
+    )}
     <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-garamond-normal-300-latin-ext.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-garamond-italic-300-latin-ext.woff2" crossorigin />
     <style is:inline set:html={criticalCss}></style>

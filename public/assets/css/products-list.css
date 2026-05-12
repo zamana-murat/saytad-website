@@ -11,10 +11,16 @@
 }
 .products-hero-bg {
   position: absolute; inset: 0;
+  background-image: image-set(url('/images/FistikliBaklavaMainpage-768w.avif') type('image/avif'), url('/images/FistikliBaklavaMainpage-768w.webp') type('image/webp'));
   background-size: cover;
   background-position: center 55%;
   transform: scale(1.04);
   animation: pHeroZoom 14s ease-out forwards;
+}
+@media (min-width: 769px) {
+  .products-hero-bg {
+    background-image: image-set(url('/images/FistikliBaklavaMainpage.avif') type('image/avif'), url('/images/FistikliBaklavaMainpage.webp') type('image/webp'));
+  }
 }
 @keyframes pHeroZoom {
   from { transform: scale(1.04); }

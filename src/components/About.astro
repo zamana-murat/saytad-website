@@ -48,8 +48,17 @@ const t = lang === 'tr'
   <div class="about-inner">
     <div class="about-photo">
       <picture>
-        <source srcset="/images/P1010992.avif" type="image/avif" />
-        <img src="/images/P1010992.webp" alt={t.alt} loading="lazy" width="1200" height="900" />
+        <source
+          type="image/avif"
+          sizes="(max-width: 960px) 100vw, 50vw"
+          srcset="/images/P1010992-600w.avif 600w, /images/P1010992-1200w.avif 1200w, /images/P1010992.avif 1600w"
+        />
+        <source
+          type="image/webp"
+          sizes="(max-width: 960px) 100vw, 50vw"
+          srcset="/images/P1010992-600w.webp 600w, /images/P1010992-1200w.webp 1200w, /images/P1010992.webp 1600w"
+        />
+        <img src="/images/P1010992.webp" alt={t.alt} loading="lazy" width="1600" height="2133" />
       </picture>
       <div class="about-photo-caption">
         <p>{t.caption}</p>

@@ -26,8 +26,17 @@ const t = lang === 'tr'
 ---
 <div class="gift-banner">
   <picture>
-    <source srcset="/images/Beyaz-Cikolatali-Soguk-Baklava.avif" type="image/avif" />
-    <img class="gift-banner-bg" src="/images/Beyaz-Cikolatali-Soguk-Baklava.webp" alt="" loading="lazy" decoding="async" width="1600" height="900" />
+    <source
+      type="image/avif"
+      sizes="100vw"
+      srcset="/images/Beyaz-Cikolatali-Soguk-Baklava-768w.avif 768w, /images/Beyaz-Cikolatali-Soguk-Baklava-1200w.avif 1200w, /images/Beyaz-Cikolatali-Soguk-Baklava.avif 1600w"
+    />
+    <source
+      type="image/webp"
+      sizes="100vw"
+      srcset="/images/Beyaz-Cikolatali-Soguk-Baklava-768w.webp 768w, /images/Beyaz-Cikolatali-Soguk-Baklava-1200w.webp 1200w, /images/Beyaz-Cikolatali-Soguk-Baklava.webp 1600w"
+    />
+    <img class="gift-banner-bg" src="/images/Beyaz-Cikolatali-Soguk-Baklava.webp" alt="" loading="lazy" decoding="async" width="1600" height="2133" />
   </picture>
   <div class="gift-banner-content reveal">
     <p class="section-label">{t.eyebrow}</p>
