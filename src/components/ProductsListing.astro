@@ -102,9 +102,10 @@ const categories: { id: ProductCategory; anchor: string }[] = [
           const name = isTR ? p.nameTR : p.nameEN;
           const desc = isTR ? p.descTR : p.descEN;
           const price = isTR ? p.priceTR : p.priceEN;
-          const avifImage = p.image ? p.image.replace(/\.webp$/, '.avif') : '';
+          const avif600 = p.image ? p.image.replace(/\.webp$/, '-600w.avif') : '';
+          const webp600 = p.image ? p.image.replace(/\.webp$/, '-600w.webp') : '';
           const style = p.image
-            ? `background-image: image-set(url('${avifImage}') type('image/avif'), url('${p.image}') type('image/webp')); background-position: ${p.imagePos ?? 'center'};`
+            ? `background-image: image-set(url('${avif600}') type('image/avif'), url('${webp600}') type('image/webp')); background-position: ${p.imagePos ?? 'center'};`
             : undefined;
           return (
             <a href={r.product(slug)} class="menu-item" style={style}>

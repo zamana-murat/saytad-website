@@ -12,18 +12,37 @@ const ORIG = path.join(__dirname, 'images-original');
 
 const PLAN = [
   // [filename, widths to generate]
-  ['Fistikli-ozel-sobiyet-baklava.webp', [768]],
-  ['FistikliBaklavaMainpage.webp', [600, 768]], // also a Categories card
+  ['Fistikli-ozel-sobiyet-baklava.webp', [600, 768]], // hero (768w) + menu (600w)
+  ['FistikliBaklavaMainpage.webp', [600, 768]], // Categories + products listing hero
   ['Fistikli-ozel-sobiyet-baklava-2.webp', [600, 1200]], // Featured component
   ['P1010992.webp', [600, 1200]], // About component
-  ['Beyaz-Cikolatali-Soguk-Baklava.webp', [768, 1200]], // GiftBanner
-  // Categories cards
+  ['Beyaz-Cikolatali-Soguk-Baklava.webp', [600, 768, 1200]], // GiftBanner + menu
+  // Categories + all menu item product images
   ['Hasir_Kadayif.webp', [600]],
   ['Soguk_Baklava_Main_Page.webp', [600]],
   ['Fistikli-Midye-Baklava.webp', [600]],
   ['Cevizli-Vegan-Baklava.webp', [600]],
   ['Peynirli_Su_Boregi.webp', [600]],
   ['katmer.webp', [600]],
+  // Remaining product images (used in ProductMenu + ProductsListing tiles)
+  ['Cevizli_Baklava.webp', [600]],
+  ['fistikli-kuru-baklava.webp', [600]],
+  ['Havuc-dilim-baklava.webp', [600]],
+  ['Fistikli-Dolama-Fistik-Sarma.webp', [600]],
+  ['Ozel-kare-baklava.webp', [600]],
+  ['Fistikli-sobiyet-Baklava.webp', [600]],
+  ['Fistikli-Baklava-Prens.webp', [600]],
+  ['SaraySarma.webp', [600]],
+  ['Cevizli-Vegan-Baklava-2.webp', [600]],
+  ['CevizliDilberDudagi.webp', [600]],
+  ['Fistikli-Duz-Kadayif.webp', [600]],
+  ['Cevizli-Duz-Kadayif.webp', [600]],
+  ['Fistikli-Burma-Kadayif.webp', [600]],
+  ['Frambuazli-Soguk-Baklava.webp', [600]],
+  ['Soguk-Baklava-Main-Page-2.webp', [600]],
+  ['Sutlu-Nuriye-Baklava.webp', [600]],
+  ['Fistikli-Vegan-Burma-Kadayif.webp', [600]],
+  ['Fistikli-Vegan-Prens-Baklava.webp', [600]],
 ];
 
 let totalAvif = 0;
