@@ -111,11 +111,7 @@ const ogLocaleAlt = lang === 'tr' ? 'en_US' : 'tr_TR';
     <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-garamond-italic-300-latin-ext.woff2" crossorigin />
     <style is:inline set:html={fontsCss + criticalCss}></style>
     <link rel="preload" href="/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="preload" href="/assets/css/fonts-deferred.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript>
-      <link rel="stylesheet" href="/assets/css/main.css" />
-      <link rel="stylesheet" href="/assets/css/fonts-deferred.css" />
-    </noscript>
+    <noscript><link rel="stylesheet" href="/assets/css/main.css" /></noscript>
     <slot name="extra-css" />
 
     {schema.map((block) => (
