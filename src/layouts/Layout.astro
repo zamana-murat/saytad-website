@@ -111,7 +111,9 @@ const ogLocaleAlt = lang === 'tr' ? 'en_US' : 'tr_TR';
   </head>
   <body>
     <Header lang={lang} pathname={path} />
-    <slot />
+    <main>
+      <slot />
+    </main>
     <Footer lang={lang} />
 
     <script is:inline>
