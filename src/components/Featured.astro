@@ -30,7 +30,10 @@ const t = lang === 'tr'
 ---
 <div class="featured" id="special">
   <div class="featured-img">
-    <img src="/images/Fistikli-ozel-sobiyet-baklava-2.webp" alt={t.alt} loading="lazy" width="1200" height="900" />
+    <picture>
+      <source srcset="/images/Fistikli-ozel-sobiyet-baklava-2.avif" type="image/avif" />
+      <img src="/images/Fistikli-ozel-sobiyet-baklava-2.webp" alt={t.alt} loading="lazy" width="1200" height="900" />
+    </picture>
   </div>
   <div class="featured-content reveal">
     <p class="section-label" style="color:var(--gold);">{t.eyebrow}</p>

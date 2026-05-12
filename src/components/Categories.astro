@@ -48,7 +48,10 @@ const t = lang === 'tr'
   <div class="cat-grid">
     {t.cards.map((c) => (
       <div class={`cat-card${c.tall ? ' cat-card--tall' : ''} reveal`}>
-        <img src={c.img} alt={c.alt} loading="lazy" width="800" height="800" />
+        <picture>
+          <source srcset={c.img.replace(/\.webp$/, '.avif')} type="image/avif" />
+          <img src={c.img} alt={c.alt} loading="lazy" width="800" height="800" />
+        </picture>
         <div class="cat-label">
           <p class="cat-label-tag">{c.tag}</p>
           <h3 class="cat-label-name" set:html={c.name}></h3>

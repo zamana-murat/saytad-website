@@ -49,8 +49,9 @@ const labels = lang === 'tr'
             const name = lang === 'tr' ? p.nameTR : p.nameEN;
             const desc = lang === 'tr' ? p.descTR : p.descEN;
             const price = lang === 'tr' ? p.priceTR : p.priceEN;
+            const avifImage = p.image ? p.image.replace(/\.webp$/, '.avif') : '';
             const style = p.image
-              ? `background-image: url('${p.image}'); background-position: ${p.imagePos ?? 'center'};`
+              ? `background-image: image-set(url('${avifImage}') type('image/avif'), url('${p.image}') type('image/webp')); background-position: ${p.imagePos ?? 'center'};`
               : undefined;
             return (
               <a href={r.product(slug)} class="menu-item" style={style}>

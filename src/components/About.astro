@@ -47,7 +47,10 @@ const t = lang === 'tr'
 <div class="about" id="about">
   <div class="about-inner">
     <div class="about-photo">
-      <img src="/images/P1010992.webp" alt={t.alt} loading="lazy" width="1200" height="900" />
+      <picture>
+        <source srcset="/images/P1010992.avif" type="image/avif" />
+        <img src="/images/P1010992.webp" alt={t.alt} loading="lazy" width="1200" height="900" />
+      </picture>
       <div class="about-photo-caption">
         <p>{t.caption}</p>
       </div>

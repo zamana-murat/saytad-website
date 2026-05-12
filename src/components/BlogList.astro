@@ -86,7 +86,10 @@ const t = isTR
           <article class={cardClass}>
             <div class="blog-card-split">
               <div class="blog-card-img blog-card-img--split">
-                <img src={post.cardImage} alt={fullTitle} loading="lazy" width="800" height="600" />
+                <picture>
+                  <source srcset={post.cardImage.replace(/\.webp$/, '.avif')} type="image/avif" />
+                  <img src={post.cardImage} alt={fullTitle} loading="lazy" width="800" height="600" />
+                </picture>
                 <span class="img-overlay-tag">{overlayTag}</span>
               </div>
               <div class="blog-card-body blog-card-body--cream">
@@ -107,7 +110,10 @@ const t = isTR
       return (
         <article class={cardClass}>
           <div class="blog-card-img">
-            <img src={post.cardImage} alt={fullTitle} loading="lazy" width="800" height="600" />
+            <picture>
+              <source srcset={post.cardImage.replace(/\.webp$/, '.avif')} type="image/avif" />
+              <img src={post.cardImage} alt={fullTitle} loading="lazy" width="800" height="600" />
+            </picture>
             <span class="img-overlay-tag">{overlayTag}</span>
           </div>
           <div class="blog-card-body">

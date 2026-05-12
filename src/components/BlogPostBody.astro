@@ -43,7 +43,7 @@ const nlBtnDone = isTR ? '✓ Abone Oldunuz!' : '✓ Subscribed!';
 <div class="reading-bar" id="readingBar"></div>
 
 <section class="post-hero">
-  <div class="post-hero-bg" style={`background-image: url('${post.heroImage}');`}></div>
+  <div class="post-hero-bg" style={`background-image: image-set(url('${post.heroImage.replace(/\.webp$/, '.avif')}') type('image/avif'), url('${post.heroImage}') type('image/webp'));`}></div>
   <div class="post-hero-overlay"></div>
   <div class="post-hero-content">
     <div class="post-breadcrumb">
@@ -82,7 +82,12 @@ const nlBtnDone = isTR ? '✓ Abone Oldunuz!' : '✓ Subscribed!';
           const rTitle = `${isTR ? rp.title.tr : rp.title.en} ${isTR ? rp.titleEm.tr : rp.titleEm.en}`.trim();
           return (
             <a href={url} class="related-card">
-              <div class="related-card-img"><img src={rp.cardImage} alt={rTitle} loading="lazy" width="800" height="600" /></div>
+              <div class="related-card-img">
+                <picture>
+                  <source srcset={rp.cardImage.replace(/\.webp$/, '.avif')} type="image/avif" />
+                  <img src={rp.cardImage} alt={rTitle} loading="lazy" width="800" height="600" />
+                </picture>
+              </div>
               <p class="related-card-tag">{rTag}</p>
               <p class="related-card-title">{rTitle}</p>
             </a>

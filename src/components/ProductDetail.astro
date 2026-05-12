@@ -69,7 +69,7 @@ const orderLabel = isTR ? 'Sipariş Ver' : 'Place an Order';
 const corporateLabel = isTR ? 'Kurumsal & Toplu Sipariş' : 'Corporate & Bulk';
 ---
 <section class="product-hero">
-  <div class="product-hero-bg" style={`background-image: url('${heroBg}');`}></div>
+  <div class="product-hero-bg" style={`background-image: image-set(url('${heroBg.replace(/\.webp$/, '.avif')}') type('image/avif'), url('${heroBg}') type('image/webp'));`}></div>
   <div class="product-hero-overlay"></div>
   <div class="product-hero-content">
     <div class="product-breadcrumb">

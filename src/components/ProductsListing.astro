@@ -62,7 +62,7 @@ const categories: { id: ProductCategory; anchor: string }[] = [
 ];
 ---
 <section class="products-hero">
-  <div class="products-hero-bg" style="background-image: url('/images/FistikliBaklavaMainpage.webp');"></div>
+  <div class="products-hero-bg" style="background-image: image-set(url('/images/FistikliBaklavaMainpage.avif') type('image/avif'), url('/images/FistikliBaklavaMainpage.webp') type('image/webp'));"></div>
   <div class="products-hero-overlay"></div>
   <div class="products-hero-content">
     <div class="products-breadcrumb">
@@ -102,8 +102,9 @@ const categories: { id: ProductCategory; anchor: string }[] = [
           const name = isTR ? p.nameTR : p.nameEN;
           const desc = isTR ? p.descTR : p.descEN;
           const price = isTR ? p.priceTR : p.priceEN;
+          const avifImage = p.image ? p.image.replace(/\.webp$/, '.avif') : '';
           const style = p.image
-            ? `background-image: url('${p.image}'); background-position: ${p.imagePos ?? 'center'};`
+            ? `background-image: image-set(url('${avifImage}') type('image/avif'), url('${p.image}') type('image/webp')); background-position: ${p.imagePos ?? 'center'};`
             : undefined;
           return (
             <a href={r.product(slug)} class="menu-item" style={style}>
