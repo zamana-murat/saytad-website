@@ -49,15 +49,12 @@ const labels = lang === 'tr'
             const name = lang === 'tr' ? p.nameTR : p.nameEN;
             const desc = lang === 'tr' ? p.descTR : p.descEN;
             const price = lang === 'tr' ? p.priceTR : p.priceEN;
-            const objectPos = p.imagePos ?? 'center';
+            const avifImage = p.image ? p.image.replace(/\.webp$/, '.avif') : '';
+            const style = p.image
+              ? `background-image: image-set(url('${avifImage}') type('image/avif'), url('${p.image}') type('image/webp')); background-position: ${p.imagePos ?? 'center'};`
+              : undefined;
             return (
-              <a href={r.product(slug)} class={`menu-item${p.image ? ' menu-item--photo' : ''}`}>
-                {p.image && (
-                  <picture>
-                    <source srcset={p.image.replace(/\.webp$/, '.avif')} type="image/avif" />
-                    <img src={p.image} alt={name} loading="lazy" decoding="async" width="800" height="600" style={`object-position:${objectPos}`} class="menu-item-img" />
-                  </picture>
-                )}
+              <a href={r.product(slug)} class="menu-item" style={style}>
                 <div>
                   <p class="menu-item-name">{name}</p>
                   <p class="menu-item-desc">{desc}</p>
