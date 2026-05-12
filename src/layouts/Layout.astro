@@ -19,6 +19,8 @@ interface Props {
   schema?: object[];
   /** ISO 8601 date for `dateModified` / `article:modified_time`. */
   dateModified?: string;
+  /** Absolute path of the LCP hero image to preload (e.g. "/images/foo.webp"). */
+  preloadImage?: string;
 }
 
 const {
@@ -32,6 +34,7 @@ const {
   ogType = 'website',
   schema = [],
   dateModified,
+  preloadImage,
 } = Astro.props;
 
 const url = `${SITE.url}${path}`;
@@ -81,13 +84,22 @@ const ogLocaleAlt = lang === 'tr' ? 'en_US' : 'tr_TR';
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
 
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
     <link rel="preload" href="/assets/css/main.css" as="style" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500&display=swap"
-      rel="stylesheet"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500&display=swap"
+      />
+    </noscript>
     <link rel="stylesheet" href="/assets/css/main.css" />
     <slot name="extra-css" />
 

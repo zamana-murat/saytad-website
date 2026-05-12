@@ -19,7 +19,7 @@ const year = new Date().getFullYear();
       <div class="footer-brand-desc">
         <p>📍 {SITE.locations[0].name} &nbsp;·&nbsp; {SITE.locations[1].name}</p>
         <p class="footer-phone">📞<span>{SITE.locations[0].area}: {SITE.phoneDisplay}<br />{SITE.locations[1].area}: {SITE.phoneDisplay}</span></p>
-        <p>✉️ {SITE.email}</p>
+        <p>✉️ <a href={r.contact}>{s.companyLinks.contact}</a></p>
         <p>🕐 {hours}</p>
       </div>
     </div>

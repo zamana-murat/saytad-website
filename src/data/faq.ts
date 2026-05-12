@@ -20,8 +20,8 @@ export const FAQS: FAQ[] = [
       en: 'Do you ship outside Istanbul?',
     },
     a: {
-      tr: 'Evet, Türkiye genelinde kargo gönderimi yapıyoruz. ₺3.000 üzeri siparişlerde kargo ücretsizdir. Yurt dışı için lütfen info@saytad.com üzerinden bizimle iletişime geçin.',
-      en: 'Yes, we ship throughout Turkey. Shipping is free on orders over ₺3,000. For international orders, please contact us at info@saytad.com.',
+      tr: 'Evet, Türkiye genelinde kargo gönderimi yapıyoruz. ₺3.000 üzeri siparişlerde kargo ücretsizdir. Yurt dışı için lütfen iletişim formumuz üzerinden bizimle iletişime geçin.',
+      en: 'Yes, we ship throughout Turkey. Shipping is free on orders over ₺3,000. For international orders, please reach us via our contact form.',
     },
   },
   {
@@ -40,8 +40,8 @@ export const FAQS: FAQ[] = [
       en: 'Do you accept corporate and bulk orders?',
     },
     a: {
-      tr: 'Evet. Kurumsal hediye paketlemesi, marka kartonu, kart yazıları ve toplu indirimler mümkündür. info@saytad.com veya +90 539 513 8003 üzerinden detayları konuşalım.',
-      en: 'Yes. Corporate gift packaging, branded cartons, custom card messages and bulk discounts are available. Reach us at info@saytad.com or +90 539 513 8003 to discuss.',
+      tr: 'Evet. Kurumsal hediye paketlemesi, marka kartonu, kart yazıları ve toplu indirimler mümkündür. İletişim formumuz veya +90 539 513 8003 üzerinden detayları konuşalım.',
+      en: 'Yes. Corporate gift packaging, branded cartons, custom card messages and bulk discounts are available. Reach us via our contact form or +90 539 513 8003 to discuss.',
     },
   },
   {

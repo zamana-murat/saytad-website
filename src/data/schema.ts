@@ -20,7 +20,6 @@ export const orgSchema = {
   servesCuisine: 'Turkish',
   priceRange: '₺₺',
   telephone: SITE.phone,
-  email: SITE.email,
   hasMap: 'https://maps.google.com/?q=Bahcesehir+Istanbul',
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',

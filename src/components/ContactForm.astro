@@ -1,5 +1,5 @@
 ---
-import { SITE, type Lang } from '@data/site';
+import type { Lang } from '@data/site';
 
 interface Props {
   lang: Lang;
@@ -26,7 +26,7 @@ const t = lang === 'tr'
       send: 'Mesaj Gönder',
       sending: 'Gönderiliyor...',
       sent: '✓ Gönderildi! En kısa sürede dönüş yapacağız.',
-      err: 'Gönderilemedi. Lütfen tekrar deneyin veya doğrudan info@saytad.com adresine e-posta gönderin.',
+      err: 'Gönderilemedi. Lütfen tekrar deneyin veya +90 539 513 8003 numarasından bize ulaşın.',
     }
   : {
       eyebrow: 'Reach Us',
@@ -46,7 +46,7 @@ const t = lang === 'tr'
       send: 'Send Message',
       sending: 'Sending...',
       sent: "✓ Sent! We'll be in touch.",
-      err: 'Could not send. Please try again or email info@saytad.com directly.',
+      err: 'Could not send. Please try again or call us at +90 539 513 8003.',
     };
 ---
 <section class="contact" id="contact">
@@ -57,7 +57,6 @@ const t = lang === 'tr'
       <div class="contact-details">
         <div class="cdet"><span class="cdet-icon">📍</span><span set:html={t.addr}></span></div>
         <div class="cdet"><span class="cdet-icon">📞</span><span set:html={t.phone}></span></div>
-        <div class="cdet"><span class="cdet-icon">✉️</span><span>{SITE.email}</span></div>
         <div class="cdet"><span class="cdet-icon">🕐</span><span>{t.hours}</span></div>
         <div class="cdet"><span class="cdet-icon">📦</span><span set:html={t.ship}></span></div>
       </div>
@@ -65,20 +64,20 @@ const t = lang === 'tr'
 
     <form class="contact-form" id="contactForm" data-lang={lang}>
       <div class="form-row2">
-        <div class="fg"><label>{t.first}</label><input type="text" name="firstName" placeholder={t.firstPh} required /></div>
-        <div class="fg"><label>{t.last}</label><input type="text" name="lastName" placeholder={t.lastPh} required /></div>
+        <div class="fg"><label for="cf-firstName">{t.first}</label><input id="cf-firstName" type="text" name="firstName" placeholder={t.firstPh} required /></div>
+        <div class="fg"><label for="cf-lastName">{t.last}</label><input id="cf-lastName" type="text" name="lastName" placeholder={t.lastPh} required /></div>
       </div>
-      <div class="fg"><label>{t.email}</label><input type="email" name="email" placeholder={t.emailPh} required /></div>
-      <div class="fg"><label>{t.phoneL}</label><input type="tel" name="phone" placeholder={t.phonePh} /></div>
+      <div class="fg"><label for="cf-email">{t.email}</label><input id="cf-email" type="email" name="email" placeholder={t.emailPh} required /></div>
+      <div class="fg"><label for="cf-phone">{t.phoneL}</label><input id="cf-phone" type="tel" name="phone" placeholder={t.phonePh} /></div>
       <div class="fg">
-        <label>{t.interest}</label>
-        <select name="interest">
+        <label for="cf-interest">{t.interest}</label>
+        <select id="cf-interest" name="interest">
           {t.categories.map((c, i) => (
             <option value={i === 0 ? '' : c}>{c}</option>
           ))}
         </select>
       </div>
-      <div class="fg"><label>{t.msg}</label><textarea name="message" placeholder={t.msgPh} required></textarea></div>
+      <div class="fg"><label for="cf-message">{t.msg}</label><textarea id="cf-message" name="message" placeholder={t.msgPh} required></textarea></div>
       {/* Honeypot — hidden field bots fill in */}
       <div style="position:absolute;left:-10000px;" aria-hidden="true">
         <input type="text" name="website" tabindex="-1" autocomplete="off" />

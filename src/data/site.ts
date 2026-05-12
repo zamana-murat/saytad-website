@@ -5,7 +5,6 @@ export const SITE = {
   founded: '2007',
   phone: '+905395138003',
   phoneDisplay: '+90 539 513 8003',
-  email: 'info@saytad.com',
   instagram: 'https://www.instagram.com/saytadbaklava',
   facebook: 'https://www.facebook.com/saytadbaklava',
   locations: [
