@@ -19,4 +19,4 @@ User-agent: Google-Extended
 Allow: /
 
 # Sitemap
-Sitemap: https://www.saytad.com/sitemap.xml
+Sitemap: https://saytad.com/sitemap.xml

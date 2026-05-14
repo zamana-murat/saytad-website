@@ -2,7 +2,7 @@
 Brand: Saytad Baklava
 Est.: 2007
 Location: Istanbul & Gaziantep, Turkey
-Contact: https://www.saytad.com/iletisim
+Contact: https://saytad.com/iletisim
 Phone: +90 539 513 8003
 
 /* SITE */

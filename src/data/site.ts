@@ -1,5 +1,5 @@
 export const SITE = {
-  url: 'https://www.saytad.com',
+  url: 'https://saytad.com',
   brand: 'Saytad Baklava',
   brandShort: 'Saytad',
   founded: '2007',
