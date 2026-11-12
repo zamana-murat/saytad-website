@@ -1,20 +1,23 @@
 ---
-import type { Lang } from '@data/site';
+import { SITE, hoursText, addressText, type Lang } from '@data/site';
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
+const phones = SITE.locations.map((l) => `${l.area}: ${l.phoneDisplay}`).join('<br>');
+const addrs = SITE.locations.map((l) => `<strong>${l.name}</strong><br>${addressText(l)}`).join('<br><br>');
+const hours = SITE.locations.map((l) => `${l.area}: ${hoursText(l, lang)}`).join('<br>');
 
 const t = lang === 'tr'
   ? {
       eyebrow: 'Bize Ulaşın',
       title: 'Sipariş Ver ya da',
       titleEm: 'Merhaba De',
-      addr: 'Saytad Bahçeşehir<br>Saytad Yeşilköy',
-      phone: 'Bahçeşehir: +90 539 513 8003<br>Yeşilköy: +90 539 513 8003',
-      hours: 'Pzt – Paz: 09:00 – 22:00',
+      addr: addrs,
+      phone: phones,
+      hours,
       ship: 'İstanbul içi aynı gün teslimat<br>₺3.000 üzeri siparişlerde ücretsiz kargo',
       first: 'Ad', last: 'Soyad',
       firstPh: 'Ayşe', lastPh: 'Yılmaz',
@@ -32,9 +35,9 @@ const t = lang === 'tr'
       eyebrow: 'Reach Us',
       title: 'Order or',
       titleEm: 'Just Say Hello',
-      addr: 'Saytad Bahçeşehir<br>Saytad Yeşilköy',
-      phone: 'Bahçeşehir: +90 539 513 8003<br>Yeşilköy: +90 539 513 8003',
-      hours: 'Mon – Sun: 09:00 – 22:00',
+      addr: addrs,
+      phone: phones,
+      hours,
       ship: 'Same-day delivery in Istanbul<br>₺3,000+ orders ship free',
       first: 'First Name', last: 'Last Name',
       firstPh: 'Ayşe', lastPh: 'Yılmaz',
@@ -57,7 +60,7 @@ const t = lang === 'tr'
       <div class="contact-details">
         <div class="cdet"><span class="cdet-icon">📍</span><span set:html={t.addr}></span></div>
         <div class="cdet"><span class="cdet-icon">📞</span><span set:html={t.phone}></span></div>
-        <div class="cdet"><span class="cdet-icon">🕐</span><span>{t.hours}</span></div>
+        <div class="cdet"><span class="cdet-icon">🕐</span><span set:html={t.hours}></span></div>
         <div class="cdet"><span class="cdet-icon">📦</span><span set:html={t.ship}></span></div>
       </div>
     </div>

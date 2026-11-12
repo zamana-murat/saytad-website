@@ -1,4 +1,4 @@
-import { SITE } from './site';
+import { SITE, mapsUrl } from './site';
 
 export const orgSchema = {
   '@context': 'https://schema.org',
@@ -20,18 +20,26 @@ export const orgSchema = {
   servesCuisine: 'Turkish',
   priceRange: '₺₺',
   telephone: SITE.phone,
-  hasMap: 'https://maps.google.com/?q=Bahcesehir+Istanbul',
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    opens: '09:00',
-    closes: '22:00',
-  },
+  hasMap: mapsUrl(SITE.locations[0]),
   location: SITE.locations.map((loc) => ({
-    '@type': 'PostalAddress',
-    streetAddress: loc.area,
-    addressLocality: loc.city,
-    addressCountry: 'TR',
+    '@type': 'Place',
+    name: loc.name,
+    telephone: loc.phone,
+    hasMap: mapsUrl(loc),
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: loc.street,
+      addressLocality: loc.district,
+      addressRegion: loc.city,
+      postalCode: loc.postalCode,
+      addressCountry: 'TR',
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: loc.opens,
+      closes: loc.closes,
+    },
   })),
   sameAs: [SITE.instagram, SITE.facebook],
 };

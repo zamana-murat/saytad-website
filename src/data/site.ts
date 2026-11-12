@@ -7,13 +7,35 @@ export const SITE = {
   phoneDisplay: '+90 539 513 8003',
   instagram: 'https://www.instagram.com/saytadbaklava',
   facebook: 'https://www.facebook.com/saytadbaklava',
+  // Per-branch contact details — keep in sync with the Google Business Profiles.
   locations: [
-    { name: 'Saytad Bahçeşehir', city: 'İstanbul', area: 'Bahçeşehir' },
-    { name: 'Saytad Yeşilköy', city: 'İstanbul', area: 'Yeşilköy' },
+    {
+      name: 'Saytad Bahçeşehir', city: 'İstanbul', area: 'Bahçeşehir',
+      street: 'Tahtakale Mah. Vali Recep Yazıcıoğlu Cd. No:8/D', district: 'Avcılar', postalCode: '34325',
+      phone: '+905395138003', phoneDisplay: '+90 539 513 8003',
+      opens: '09:00', closes: '22:00',
+    },
+    {
+      name: 'Saytad Yeşilköy', city: 'İstanbul', area: 'Yeşilköy',
+      street: 'Yeşilköy Mah. İstasyon Cd. No:6/6', district: 'Bakırköy', postalCode: '34149',
+      phone: '+905395138004', phoneDisplay: '+90 539 513 8004',
+      opens: '08:00', closes: '22:00',
+    },
   ],
-  hoursTR: 'Pzt – Paz: 09:00 – 22:00',
-  hoursEN: 'Mon – Sun: 09:00 – 22:00',
 } as const;
+
+export type Location = (typeof SITE.locations)[number];
+
+/** "Her gün 09:00 – 22:00" / "Daily 09:00 – 22:00" (all branches are open 7 days a week). */
+export const hoursText = (loc: Location, lang: Lang) =>
+  `${lang === 'tr' ? 'Her gün' : 'Daily'} ${loc.opens} – ${loc.closes}`;
+
+/** "Tahtakale Mah. … No:8/D, 34325 Avcılar/İstanbul" */
+export const addressText = (loc: Location) => `${loc.street}, ${loc.postalCode} ${loc.district}/${loc.city}`;
+
+/** Google Maps search link for a branch (name + full address). */
+export const mapsUrl = (loc: Location) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${loc.name}, ${addressText(loc)}`)}`;
 
 export type Lang = 'tr' | 'en';
 

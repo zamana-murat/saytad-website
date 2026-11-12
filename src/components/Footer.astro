@@ -1,5 +1,5 @@
 ---
-import { SITE, ROUTES, STRINGS, type Lang } from '@data/site';
+import { SITE, ROUTES, STRINGS, hoursText, type Lang } from '@data/site';
 
 interface Props {
   lang: Lang;
@@ -8,7 +8,7 @@ interface Props {
 const { lang } = Astro.props;
 const r = ROUTES[lang];
 const s = STRINGS[lang];
-const hours = lang === 'tr' ? SITE.hoursTR : SITE.hoursEN;
+const [loc1, loc2] = SITE.locations;
 const year = new Date().getFullYear();
 ---
 <footer>
@@ -18,9 +18,9 @@ const year = new Date().getFullYear();
       <p class="footer-brand-tag">{s.footer.tagline}</p>
       <div class="footer-brand-desc">
         <p>📍 {SITE.locations[0].name} &nbsp;·&nbsp; {SITE.locations[1].name}</p>
-        <p class="footer-phone">📞<span>{SITE.locations[0].area}: {SITE.phoneDisplay}<br />{SITE.locations[1].area}: {SITE.phoneDisplay}</span></p>
+        <p class="footer-phone">📞<span>{loc1.area}: {loc1.phoneDisplay}<br />{loc2.area}: {loc2.phoneDisplay}</span></p>
         <p>✉️ <a href={r.contact}>{s.companyLinks.contact}</a></p>
-        <p>🕐 {hours}</p>
+        <p class="footer-phone">🕐<span>{loc1.area}: {hoursText(loc1, lang)}<br />{loc2.area}: {hoursText(loc2, lang)}</span></p>
       </div>
     </div>
     <div class="footer-col">
